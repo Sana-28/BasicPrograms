@@ -21,7 +21,7 @@ public class AnagramString
 		System.out.println("Enter second string");
 		String string2=scanner.nextLine();
 		scanner.close();
-		Utility utility = new Utility();
+		//Utility utility = new Utility();
 		if (Utility.isAnagram(string1, string2)) 
 		{
 			System.out.println(string1 + " " + string2 + " are anagram");

@@ -8,18 +8,21 @@
 
 package com.bridgelabz.util;
 
+import java.io.PrintWriter;
 import java.util.Arrays;
-
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utility {
-	
+	static Scanner scanner=new Scanner(System.in);
+	static PrintWriter writer = new PrintWriter(System.out, true);
+
 	/**
-	 * This program User Input and Replace String 
+	 * This method takes User Input and Replace String 
 	 * Template“Hello <<UserName>>, How are you?” 
-	  * @param input
+	 * @param input
 	 */
 	public static void userName(String input)
 	{
@@ -30,9 +33,9 @@ public class Utility {
 		INPUT = matcher.replaceAll(input); 
 		System.out.println(INPUT);
 	}
-	
+
 	/**
-	 * This program Flips a Coin and print percentage 
+	 * This method Flips a Coin and print percentage 
 	 * of Heads and Tails
 	 * @param input
 	 */
@@ -54,8 +57,8 @@ public class Utility {
 		System.out.println("per of heads " + ((Double.valueOf(headCount)) * 100) / input + " %");
 		System.out.println("per of tails " + ((Double.valueOf(tailCount)) * 100) / input + " %");
 	}
-	
-	/** This program determine if it is a Leap Year.
+
+	/** This method determine if it is a Leap Year.
 	 * @param year
 	 */
 	public static void leapYear(int year) {
@@ -69,8 +72,8 @@ public class Utility {
 		}
 
 	}
-	
-	/**This program takes a command-line argument N 
+
+	/**This method takes a command-line argument N 
 	 * and prints a table of the powers of 2 that are
 	 *  less than 2^N
 	 * @param number
@@ -85,26 +88,26 @@ public class Utility {
 			power = power * 2;
 			i++;
 		}
-		
+
 	}
-	
-	/**This program prints the Nth harmonic number
+
+	/**This function prints the Nth harmonic number
 	 * @param value
 	 */
 	public static void harmonicNumber(int value) {
 		float i;
 		float term;
-	    float sum=0;
-	    for(i=1;i<=value;i++)
+		float sum=0;
+		for(i=1;i<=value;i++)
 		{
 			term = 1/i;
 			sum=sum+term;
 		}
-	    System.out.println("Sum of Harmonic series is=" +sum);
-		
+		System.out.println("Sum of Harmonic series is=" +sum);
+
 	}
-	
-	/**This program computes the prime factorization
+
+	/**This method computes the prime factorization
 	 *  of a Number
 	 * @param number
 	 */
@@ -114,7 +117,7 @@ public class Utility {
 			System.out.println(2+ "");
 			number/=2;
 		}
-		
+
 		for(int i=3;i<=Math.sqrt(number);i+=2)
 		{
 			while(number%i==0)
@@ -123,15 +126,15 @@ public class Utility {
 				number/=i;
 			}
 		}
-		
+
 		if(number>2)
 		{
 			System.out.println(number);
 		}
-		
+
 	}	
-	
-	/**
+
+	/**This method prints the percentage of win and lose
 	 * @param stake
 	 * @param goal
 	 * @param trials
@@ -156,26 +159,148 @@ public class Utility {
 		}
 		System.out.println("Number of Percentage won..."+(100*wins)/trials+ "%");
 		System.out.println("Number of Percentage loss..."+(100*loss)/trials+ "%");
-		
+
 	}
 
-	
-	/****
-	 * This method is to calculate Permutation
-	 ****/
+	/**This method generates distinct coupon number
+	 * @param array
+	 */
+	public static void couponNumber(int number) {
 
-	public void permutation(String str) {
-		// System.out.println(str);
+		int[] array=new int[number];
+
+		for(int i=0; i < array.length; i++)
+		{
+			array[i]=(int)(Math.random()*number);
+			for(int j=0; j<i; j++)
+			{
+				if(array[i] == array[j])
+				{
+					i--;
+				}
+			}
+		}
+		for(int i: array)
+		{
+			System.out.println("Generated number is : " +i);
+		}
+		System.out.println("Distinct generated number are :" +number);
 	}
 
-	public void permute(String str, int l, int r) {
-		if (l == r)
-			System.out.println(str);
+	/**This method reads integer array from user
+	 * @param array
+	 * @param rows
+	 * @param columns
+	 */
+	public static void inputArray(Integer[][] array, int rows, int columns) {
+		writer.println("Enter Array elements");
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				array[i][j] = scanner.nextInt();
+			}
+		}
+		Utility.printArray(array, rows, columns);
+	}
+
+	/**This method reads double array from user
+	 * @param array
+	 * @param rows
+	 * @param columns
+	 */
+	public static void inputArray(Double array[][], int rows, int columns) {
+		writer.println("Enter Array elements");
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				array[i][j] = scanner.nextDouble();
+			}
+		}
+		Utility.printArray(array, rows, columns);
+
+	}
+
+	/**This method reads boolean input array from user
+
+	 * @param array
+	 * @param rows
+	 * @param columns
+	 */
+	public static void inputArray(Boolean array[][], int rows, int columns) {
+		writer.println("Enter Array elements");
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				array[i][j] = scanner.nextBoolean();
+			}
+		}
+		Utility.printArray(array, rows, columns);
+
+	}
+
+	/**This method prints the output of 2D array
+	 * @param array
+	 * @param rows
+	 * @param columns
+	 */
+	public static <E> void printArray(E[][] array, int rows, int columns)
+	{
+		writer.println("Array elements are:");
+		for(int i=0; i<rows; i++)
+		{
+			for(int j=0; j<columns; j++)
+			{
+				writer.print(array[i][j]+"  ");		
+			}
+			writer.println(" ");
+		}
+	}
+
+	/**This method finds the triplet with sum zero
+	 * @param N
+	 * @param array
+	 */
+	public static void findTriplet(int number, int[] array) {
+		//System.out.println("hi..");
+		boolean found = false;
+
+		for (int i = 0; i <number- 2; i++) {
+			for (int j = i + 1; j < number- 1; j++) {
+				for (int k = j + 1; k < number; k++) {
+					if (array[i] + array[j] + array[k] == 0) {
+						System.out.println("Triplets are :" +array[i] + " " + array[j] + " " + array[k]);
+						found = true;
+					}
+				}
+			}
+		}
+		if (found == false)
+			System.out.println("Triplets not Exist...");
+	}
+
+	/**This method calculates distance between two points
+	 * @param initial1
+	 * @param initial2
+	 * @param final1
+	 * @param final2
+	 */
+	public static void findDistance(int initial1, int initial2, int final1, int final2) {
+		double distance;
+		distance = Math.sqrt((initial1*final1)+(initial2*final2));
+		System.out.println("distancebetween initial and final points" +distance);
+
+	}
+
+	/**This method is to calculate Permutation
+	 * @param string
+	 * @param left
+	 * @param right
+	 */
+	public void permute(String string, int left, int right) {
+		if (left == right)
+			System.out.println(string);
 		else {
-			for (int i = l; i <= r; i++) {
-				str = swap(str, l, i);
-				permute(str, l + 1, r);
-				str = swap(str, l, i);
+			for (int i = left; i <= right; i++) {
+				string = swap(string, left, i);
+				permute(string, left + 1, right);
+				string = swap(string, left, i);
 			}
 		}
 	}
@@ -189,23 +314,41 @@ public class Utility {
 		return String.valueOf(charArray);
 	}
 
-	/****
-	 * This method is to calculate WindChill
-	 ****/
-	public double wind(double temperature, double velocity) {
-		double windchill = 35.74 + 0.6215 * temperature + (0.4275 - 35.75) * Math.pow(velocity, 0.16);
-		return windchill;
-	}
 
-	/****
+	/**This method calculates the time between
+	 *  start and stop watch
+	 *  
+	 */
+	public static void stopWatch() {
+
+		System.out.println("Press 1 to Start the time:");
+		scanner.nextLong();
+		long startTime = System.currentTimeMillis();
+		System.out.println("Start time.." +startTime);
+
+		System.out.println("Press 2 to stop the time:");
+		scanner.nextLong();
+		long stopTime = System.currentTimeMillis();
+		System.out.println("Stop Time." +stopTime);
+
+		long elapsedTime= stopTime-startTime;
+		//System.out.println("Elapsed time between start and stop.." +elapsedTime);
+		System.out.println(" " +(elapsedTime / 1000) % 60+ "sec");
+	}
+	
+	/**
 	 * This method is to find the square root
-	 ****/
+
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @return
+	 */
 	public double root(int a, int b, int c) {
 		double root1, root2;
 		double delta = ((b * b) - (4 * a * c));
 
 		if (delta > 0) {
-
 			System.out.println("Roots are real and unequal");
 			root1 = (-b + Math.sqrt(delta)) / (2 * a);
 			root2 = (-b - Math.sqrt(delta)) / (2 * a);
@@ -224,10 +367,26 @@ public class Utility {
 	}
 
 	/****
-	 * This method is to find the one string anagram of another
-	 * 
+	 * This method is to calculate WindChill
+	
+	 * @param temperature
+	 * @param velocity
 	 * @return
-	 ****/
+	 */
+	public double wind(double temperature, double velocity) {
+		double windchill = 35.74 + 0.6215 * temperature + (0.4275 - 35.75) * Math.pow(velocity, 0.16);
+		return windchill;
+	}
+
+	
+
+	/****
+	 * This method is to find the one string anagram of another
+	 
+	 * @param string1
+	 * @param string2
+	 * @return
+	 */
 	public static boolean isAnagram(String string1, String string2) {
 		// int n1=str1.length();
 		// int n2=str2.length();
@@ -387,9 +546,9 @@ public class Utility {
 			int first=1;
 			int last=number-1;
 			int mid= (first+ last)/2;
-			
+
 			System.out.println("");
-			
+
 			if (mid>guess)
 			{
 				mid=mid+1;
@@ -419,34 +578,34 @@ public class Utility {
 	/****
 	 * This program binarySearch for integer an prints an output in sorted form
 	 ****/
-	
+
 	public static int binarySearch(int[] array, int key) {
 		int left=0;
 		int right= array.length-1;
-		
+
 		while (left <= right)
 		{
 			int mid = (left + (array.length-1))/2;
 			if(array[mid] == key)
 				System.out.println("Element found" +array[mid]);
-			
+
 			if(array[mid] < key)
 			{
 				left=array[mid] +1;
-				
+
 			}
 			else
 			{
 				right=array[mid]-1;
 			}
 			return 1;
-	}
+		}
 		return -1;
-}
+	}
 	/****
 	 This program is to find day of week
 	 ****/
-	
+
 	public static int dayOfWeek(int month,int day,int year)
 	{
 		System.out.println("Entered date is : " +month+"/"+day+"/"+year);
@@ -460,14 +619,16 @@ public class Utility {
 	/**** This program to calculate the minimum number of Notes 
 	 as well as the Notes to be returned by the Vending Machine
 	  as a Change ****/
-	
+
 	public static void vendingMachine(int amount) {
 		// TODO Auto-generated method stub
 		int currency[]={1, 2, 5, 10, 20, 50, 100, 500, 1000};
 		for(int i=amount-1; i>=0; i--)
 		{
-			
+
 		}
 	}
 
+
 }
+

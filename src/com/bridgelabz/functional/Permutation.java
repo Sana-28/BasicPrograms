@@ -16,10 +16,10 @@ public class Permutation {
 		Utility utility = new Utility();
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter a string");
-		String str = scanner.nextLine();
-		int n = str.length();
+		String string = scanner.nextLine();
+		int length = string.length();
 		scanner.close();
 		// utility.permutation(str);
-		utility.permute(str, 0, n - 1);
+		utility.permute(string, 0, length - 1);
 	}
 }

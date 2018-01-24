@@ -1,23 +1,25 @@
 package com.bridgelabz.functional;
 
-import java.lang.Math;
-import java.util.Random;
+import java.lang.String;
 import java.util.Scanner;
 
+import com.bridgelabz.util.Utility;
+
+/**Purpose:This program takes a number and generate distinct coupon
+
+ * @author SanaShaikh
+ * @since  13/01/2018  
+ *
+ */
 public class CouponNumber {
 
 	public static void main(String[] args) {
-		int count=0;
 		System.out.println("Enter the number of Coupons");
 		Scanner scanner=new Scanner(System.in);
 		int number=scanner.nextInt();
 		
-		for(int i=0;i<number; i++)
-		{
-			int Random=(int) (Math.random() * number);
-			System.out.println("" +Random);
-		}
-		
-}
+		Utility.couponNumber(number);
+		scanner.close();
+	}
 
 }

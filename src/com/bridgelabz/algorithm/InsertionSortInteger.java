@@ -17,8 +17,8 @@ public class InsertionSortInteger {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the size of list:");
-		int n = scanner.nextInt();
-		int[] array = new int[n];
+		int size = scanner.nextInt();
+		int[] array = new int[size];
 
 		System.out.println("Enter the list of elements to be sorted:");
 		for (int i = 0; i < array.length; i++) {
@@ -27,8 +27,8 @@ public class InsertionSortInteger {
 		
 		System.out.println("Sorted list is:");
 		scanner.close();
-		Utility.insertionSort(array);
-		Utility.printArray(array);
+		//Utility.insertionSort(array);
+		//Utility.printArray(array);
 	}
 
 }

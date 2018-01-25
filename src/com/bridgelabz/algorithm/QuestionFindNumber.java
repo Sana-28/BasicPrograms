@@ -9,33 +9,8 @@ public class QuestionFindNumber {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter your number");
 		int number = scanner.nextInt();
-
-		int n = (int) Math.sqrt(number);
-		
-		System.out.println("root is "+n);
-		int low =0, high = number-1;
-		
-		for(int i=0; i<n; i++)
-		{
-			int mid = (high + low) / 2;
-			System.out.println("If your number between "+low+" To "+mid+" Press 1... OR "+mid+" To "+high+" Pess 0");
-			int value = scanner.nextInt();
-			if (value == 1) 
-			{
-				low = low;
-				high = mid;
-			}
-			else if(value == 0)
-			{
-				low = mid + 1;
-				high = high;
-			}
-			if (low == high) 
-			{
-				System.out.println("the number is" + mid);
-				
-			}
-	
-	}
+		//int squareRoot = (int) Math.sqrt(number);
+		//System.out.println("Square root of a number is:" +squareRoot);
+		scanner.close();
 	}
 }

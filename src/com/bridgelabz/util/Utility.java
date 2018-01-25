@@ -16,31 +16,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utility {
-	static Scanner scanner=new Scanner(System.in);
+	static Scanner scanner = new Scanner(System.in);
 	static PrintWriter writer = new PrintWriter(System.out, true);
 
 	/**
-	 * This method takes User Input and Replace String 
-	 * Template“Hello <<UserName>>, How are you?” 
+	 * This method takes User Input and Replace String Template“Hello
+	 * <<UserName>>, How are you?”
+	 * 
 	 * @param input
 	 */
-	public static void userName(String input)
-	{
+	public static void userName(String input) {
 		String REGEX = "<<UserName>>";
 		String INPUT = "Hello <<UserName>> , How are you?";
-		Pattern pattern  = Pattern.compile(REGEX);
-		Matcher matcher = pattern.matcher(INPUT); 
-		INPUT = matcher.replaceAll(input); 
+		Pattern pattern = Pattern.compile(REGEX);
+		Matcher matcher = pattern.matcher(INPUT);
+		INPUT = matcher.replaceAll(input);
 		System.out.println(INPUT);
 	}
 
 	/**
-	 * This method Flips a Coin and print percentage 
-	 * of Heads and Tails
+	 * This method Flips a Coin and print percentage of Heads and Tails
+	 * 
 	 * @param input
 	 */
-	public static void flipCoin(int input)
-	{
+	public static void flipCoin(int input) {
 		int flip;
 		int headCount = 0;
 		int tailCount = 0;
@@ -58,136 +57,133 @@ public class Utility {
 		System.out.println("per of tails " + ((Double.valueOf(tailCount)) * 100) / input + " %");
 	}
 
-	/** This method determine if it is a Leap Year.
+	/**
+	 * This method determine if it is a Leap Year.
+	 * 
 	 * @param year
 	 */
 	public static void leapYear(int year) {
-		if(((year%400==0) || ((year%100!=0) && (year%4==0))))
-		{
-			System.out.println("Year "+year+" is a Leap Year");
-		}
-		else
-		{
-			System.out.println("Year "+year+" is not a Leap Year");
+		if (((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))) {
+			System.out.println("Year " + year + " is a Leap Year");
+		} else {
+			System.out.println("Year " + year + " is not a Leap Year");
 		}
 
 	}
 
-	/**This method takes a command-line argument N 
-	 * and prints a table of the powers of 2 that are
-	 *  less than 2^N
+	/**
+	 * This method takes a command-line argument N and prints a table of the
+	 * powers of 2 that are less than 2^N
+	 * 
 	 * @param number
 	 */
 	public static void powerOfTwo(int number) {
 		int i = 0;
 		int power = 1;
-		System.out.println("Powers of 2 that are less than 2^"+number);
-		while (i < number)
-		{
-			System.out.println("2^"+i+" = " + power);
+		System.out.println("Powers of 2 that are less than 2^" + number);
+		while (i < number) {
+			System.out.println("2^" + i + " = " + power);
 			power = power * 2;
 			i++;
 		}
 
 	}
 
-	/**This function prints the Nth harmonic number
+	/**
+	 * This function prints the Nth harmonic number
+	 * 
 	 * @param value
 	 */
 	public static void harmonicNumber(int value) {
 		float i;
 		float term;
-		float sum=0;
-		for(i=1;i<=value;i++)
-		{
-			term = 1/i;
-			sum=sum+term;
+		float sum = 0;
+		for (i = 1; i <= value; i++) {
+			term = 1 / i;
+			sum = sum + term;
 		}
-		System.out.println("Sum of Harmonic series is=" +sum);
+		System.out.println("Sum of Harmonic series is=" + sum);
 
 	}
 
-	/**This method computes the prime factorization
-	 *  of a Number
+	/**
+	 * This method computes the prime factorization of a Number
+	 * 
 	 * @param number
 	 */
 	public static void primeFactoristaion(int number) {
-		while(number%2==0)
-		{
-			System.out.println(2+ "");
-			number/=2;
+		while (number % 2 == 0) {
+			System.out.println(2 + "");
+			number /= 2;
 		}
 
-		for(int i=3;i<=Math.sqrt(number);i+=2)
-		{
-			while(number%i==0)
-			{
-				System.out.println(i+ "");
-				number/=i;
+		for (int i = 3; i <= Math.sqrt(number); i += 2) {
+			while (number % i == 0) {
+				System.out.println(i + "");
+				number /= i;
 			}
 		}
 
-		if(number>2)
-		{
+		if (number > 2) {
 			System.out.println(number);
 		}
 
-	}	
+	}
 
-	/**This method prints the percentage of win and lose
+	/**
+	 * This method prints the percentage of win and lose
+	 * 
 	 * @param stake
 	 * @param goal
 	 * @param trials
 	 */
 	public static void gambler(int stake, int goal, int trials) {
-		int wins=0,i,loss=0;
-		for(i=0;i<trials;i++)
-		{
-			int cash=stake;
+		int wins = 0, i, loss = 0;
+		for (i = 0; i < trials; i++) {
+			int cash = stake;
 
-			while(cash>0 && cash<goal)
-			{
-				if(Math.random()<0.5)
-					cash++; 
-				else 
-					cash--; 
+			while (cash > 0 && cash < goal) {
+				if (Math.random() < 0.5)
+					cash++;
+				else
+					cash--;
 			}
-			if(cash==goal) 
+			if (cash == goal)
 				wins++;
 			else
 				loss++;
 		}
-		System.out.println("Number of Percentage won..."+(100*wins)/trials+ "%");
-		System.out.println("Number of Percentage loss..."+(100*loss)/trials+ "%");
+		System.out.println("Number of Percentage won..." + (100 * wins) / trials + "%");
+		System.out.println("Number of Percentage loss..." + (100 * loss) / trials + "%");
 
 	}
 
-	/**This method generates distinct coupon number
+	/**
+	 * This method generates distinct coupon number
+	 * 
 	 * @param array
 	 */
 	public static void couponNumber(int number) {
 
-		int[] array=new int[number];
+		int[] array = new int[number];
 
-		for(int i=0; i < array.length; i++)
-		{
-			array[i]=(int)(Math.random()*number);
-			for(int j=0; j<i; j++)
-			{
-				if(array[i] == array[j])
-				{
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) (Math.random() * number);
+			for (int j = 0; j < i; j++) {
+				if (array[i] == array[j]) {
 					i--;
 				}
 			}
 		}
-		for(int i: array)
-		{
-			System.out.println("Generated number is : " +i);
+		for (int i : array) {
+			System.out.println("Generated number is : " + i);
 		}
-		System.out.println("Distinct generated number are :" +number);
+		System.out.println("Distinct generated number are :" + number);
 	}
 
-	/**This method reads integer array from user
+	/**
+	 * This method reads integer array from user
+	 * 
 	 * @param array
 	 * @param rows
 	 * @param columns
@@ -202,7 +198,9 @@ public class Utility {
 		Utility.printArray(array, rows, columns);
 	}
 
-	/**This method reads double array from user
+	/**
+	 * This method reads double array from user
+	 * 
 	 * @param array
 	 * @param rows
 	 * @param columns
@@ -218,8 +216,9 @@ public class Utility {
 
 	}
 
-	/**This method reads boolean input array from user
-
+	/**
+	 * This method reads boolean input array from user
+	 * 
 	 * @param array
 	 * @param rows
 	 * @param columns
@@ -235,37 +234,38 @@ public class Utility {
 
 	}
 
-	/**This method prints the output of 2D array
+	/**
+	 * This method prints the output of 2D array
+	 * 
 	 * @param array
 	 * @param rows
 	 * @param columns
 	 */
-	public static <E> void printArray(E[][] array, int rows, int columns)
-	{
+	public static <E> void printArray(E[][] array, int rows, int columns) {
 		writer.println("Array elements are:");
-		for(int i=0; i<rows; i++)
-		{
-			for(int j=0; j<columns; j++)
-			{
-				writer.print(array[i][j]+"  ");		
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				writer.print(array[i][j] + "  ");
 			}
 			writer.println(" ");
 		}
 	}
 
-	/**This method finds the triplet with sum zero
+	/**
+	 * This method finds the triplet with sum zero
+	 * 
 	 * @param N
 	 * @param array
 	 */
 	public static void findTriplet(int number, int[] array) {
-		//System.out.println("hi..");
+		// System.out.println("hi..");
 		boolean found = false;
 
-		for (int i = 0; i <number- 2; i++) {
-			for (int j = i + 1; j < number- 1; j++) {
+		for (int i = 0; i < number - 2; i++) {
+			for (int j = i + 1; j < number - 1; j++) {
 				for (int k = j + 1; k < number; k++) {
 					if (array[i] + array[j] + array[k] == 0) {
-						System.out.println("Triplets are :" +array[i] + " " + array[j] + " " + array[k]);
+						System.out.println("Triplets are :" + array[i] + " " + array[j] + " " + array[k]);
 						found = true;
 					}
 				}
@@ -275,7 +275,9 @@ public class Utility {
 			System.out.println("Triplets not Exist...");
 	}
 
-	/**This method calculates distance between two points
+	/**
+	 * This method calculates distance between two points
+	 * 
 	 * @param initial1
 	 * @param initial2
 	 * @param final1
@@ -283,12 +285,14 @@ public class Utility {
 	 */
 	public static void findDistance(int initial1, int initial2, int final1, int final2) {
 		double distance;
-		distance = Math.sqrt((initial1*final1)+(initial2*final2));
-		System.out.println("distancebetween initial and final points" +distance);
+		distance = Math.sqrt((initial1 * final1) + (initial2 * final2));
+		System.out.println("distancebetween initial and final points" + distance);
 
 	}
 
-	/**This method is to calculate Permutation
+	/**
+	 * This method is to calculate Permutation
+	 * 
 	 * @param string
 	 * @param left
 	 * @param right
@@ -314,31 +318,31 @@ public class Utility {
 		return String.valueOf(charArray);
 	}
 
-
-	/**This method calculates the time between
-	 *  start and stop watch
-	 *  
+	/**
+	 * This method calculates the time between start and stop watch
+	 * 
 	 */
 	public static void stopWatch() {
 
 		System.out.println("Press 1 to Start the time:");
 		scanner.nextLong();
 		long startTime = System.currentTimeMillis();
-		System.out.println("Start time.." +startTime);
+		System.out.println("Start time.." + startTime);
 
 		System.out.println("Press 2 to stop the time:");
 		scanner.nextLong();
 		long stopTime = System.currentTimeMillis();
-		System.out.println("Stop Time." +stopTime);
+		System.out.println("Stop Time." + stopTime);
 
-		long elapsedTime= stopTime-startTime;
-		//System.out.println("Elapsed time between start and stop.." +elapsedTime);
-		System.out.println(" " +(elapsedTime / 1000) % 60+ "sec");
+		long elapsedTime = stopTime - startTime;
+		// System.out.println("Elapsed time between start and stop.."
+		// +elapsedTime);
+		System.out.println(" " + (elapsedTime / 1000) % 60 + "sec");
 	}
-	
+
 	/**
 	 * This method is to find the square root
-
+	 * 
 	 * @param a
 	 * @param b
 	 * @param c
@@ -368,7 +372,7 @@ public class Utility {
 
 	/****
 	 * This method is to calculate WindChill
-	
+	 * 
 	 * @param temperature
 	 * @param velocity
 	 * @return
@@ -378,11 +382,9 @@ public class Utility {
 		return windchill;
 	}
 
-	
-
 	/****
 	 * This method is to find the one string anagram of another
-	 
+	 * 
 	 * @param string1
 	 * @param string2
 	 * @return
@@ -436,199 +438,177 @@ public class Utility {
 		}
 	}
 
-	/****
-	 * This method is to sort a integer list and print it, using insertion sort
-	 ****/
-	public static void insertionSort(int array[]) {
-		for (int i = 1; i < array.length; ++i) {
-			int key = array[i];
-			int j = i - 1;
+	/**
+	 * This method sort the array using insertion sort
+	 * 
+	 * @param array
+	 */
+	public static <T extends Comparable> T[] insertionSort(T[] array) {
 
-			while (j >= 0 && array[j] > key) {
-				array[j + 1] = array[j];
-				j = j - 1;
+		int i, temporary;
+		for (i = 1; i < array.length; i++) {
+			T key = array[i];
+			temporary = i;
+
+			while (temporary > 0 && array[temporary - 1].compareTo(key) > 0) {
+				array[temporary] = array[temporary - 1];
+				temporary--;
 			}
-			array[j + 1] = key;
+			array[temporary] = key;
 		}
+		return array;
 	}
 
-	public static void printArray(int array[]) {
-		for (int i = 0; i < array.length; ++i)
-			System.out.print(array[i] + " ");
-
-		System.out.println();
-	}
-
-	/****
-	 * This method is to sort a string list using insertion sort
-	 ****/
-	public static void insertionString(String inputArray[])
-	{
-		int i = 0, j =0;
-		String key = inputArray[i];
-		for (i = 1; i < inputArray.length; i++)
-		{
-			for (j = i; j > 0; j--) 
-			{
-				if (key.compareTo(inputArray[j - 1]) < 0) 
-				{
-					inputArray[j] = inputArray[j - 1];
-				} 
-				else
-					break; 
+	/**
+	 * THis method sorts list of elements using bubble sort
+	 * 
+	 * @param array
+	 * @return
+	 */
+	public static <T extends Comparable> T[] bubbleSort(T[] array) {
+		int i, j;
+		int length = array.length;
+		for (i = 0; i < length; i++) {
+			for (j = 1; j < length - i; j++) {
+				if ((array[j - 1]).compareTo(array[j]) > 0) {
+					T temp = array[j - 1];
+					array[j - 1] = array[j];
+					array[j] = temp;
+				}
 			}
-			inputArray[j] = key;
 		}
+		return array;
 	}
 
-	public static void printInputArray(String[] inputArray) 
-	{ 
-		for (int i = 0;i < inputArray.length; ++i) 
-		{
-			System.out.print(inputArray[i] + " ");
-		}
-		System.out.println();
+	/**
+	 * This method search a element in sorted list using binary search
+	 * 
+	 * @param array
+	 * @param key
+	 * @return
+	 */
+	public static <T extends Comparable> int binarySearch(T[] array, T key, int left, int right) {
+
+		if (left > right)
+			return 0;
+
+		int mid = (left + right) / 2;
+
+		if (array[mid].equals(key))
+			return 1;
+		else if ((array[mid]).compareTo(key) > 0)
+			return binarySearch(array, key, left, mid - 1);
+		else
+			return binarySearch(array, key, mid + 1, right);
+	}
+	
+	/**
+	 * This method prints a sorted array
+	 * 
+	 * @param array
+	 */
+	public static <T> void printArray(T[] array) {
+		System.out.println("Sorted array list :");
+		for (int i = 0; i < array.length; i++)
+			System.out.println(array[i] + " ");
 
 	}
 
 	/****
-	 * This method takes temperature input in fahrenheit, outputs the temperature in Celsius or viceversa
+	 * This method takes temperature input in fahrenheit, outputs the
+	 * temperature in Celsius or viceversa
 	 ****/
 
 	public static void temperatureConversion() {
 		// TODO Auto-generated method stub
-		Scanner input = new Scanner(System.in);
-		System.out.println("\nEnter 1 for Fahrenheit to Celsius" + "\nEnter 2 for Celsius to Fahrenheit" + "\nSomething else to Exit." + "\nYour Option:");
-		int selection = input.nextInt();
+		System.out.println("\nEnter 1 for Fahrenheit to Celsius" + "\nEnter 2 for Celsius to Fahrenheit"
+				+ "\nSomething else to Exit." + "\nYour Option:");
+		int selection = scanner.nextInt();
 		if (selection == 1) {
 			System.out.println("Enter a degree in Fahrenheit:");
-			far2cel();
+			fahrenheitToCelsius();
 		} else if (selection == 2) {
 			System.out.println("Enter a degree in Celsius:");
-			cel2far();
+			celsiusToFahrenheit();
 		} else {
 			System.out.println("Invalid");
 		}
-		input.close();
+
 	}
 
-	private static void cel2far() {
+	private static void celsiusToFahrenheit() {
 		// TODO Auto-generated method stub
-		Scanner input = new Scanner(System.in);
-		Double celsius = input.nextDouble();
+		Double celsius = scanner.nextDouble();
 		System.out.println(celsius + " celsius is " + ((celsius * 9 / 5.0) + 32) + " Fahrenheit");
 		temperatureConversion();
-		input.close();
 	}
 
-	private static void far2cel() {
+	private static void fahrenheitToCelsius() {
 		// TODO Auto-generated method stub
-		Scanner input = new Scanner(System.in);
-
-		Double Fahrenheit = input.nextDouble();
+		Double Fahrenheit = scanner.nextDouble();
 		System.out.println(Fahrenheit + " Fahrenheit is " + ((Fahrenheit - 32) * (5 / 9.0)) + " celsius");
 		temperatureConversion();
-		input.close();
 	}
 
-	/****
-		This method takes a command-line argument N, asks you to think of a number between 0 and N-1,and always guesses the answer with n questions.
-
-	 ****/
-
+	/**
+	 * This method takes a command-line argument N, asks you to think of a
+	 * number between 0 and N-1,and always guesses the answer with n questions.
+	 * 
+	 * @param number
+	 */
 	public void search(int number) {
 		// TODO Auto-generated method stub
-		Scanner scanner=new Scanner(System.in);
 		System.out.println("Guess a number:");
-		int guess=scanner.nextInt();
-		for(int i = 1; i<=number-1; )
-		{
-			int first=1;
-			int last=number-1;
-			int mid= (first+ last)/2;
+		int guess = scanner.nextInt();
+		for (int i = 1; i <= number - 1;) {
+			int first = 1;
+			int last = number - 1;
+			int mid = (first + last) / 2;
 
 			System.out.println("");
 
-			if (mid>guess)
-			{
-				mid=mid+1;
-				System.out.println("The guess number is:"+mid);
+			if (mid > guess) {
+				mid = mid + 1;
+				System.out.println("The guess number is:" + mid);
 				break;
-			}
-			else if(mid<guess)
-			{
-				mid=mid-1;
-				System.out.println("The guess number is:"+mid);
+			} else if (mid < guess) {
+				mid = mid - 1;
+				System.out.println("The guess number is:" + mid);
 				break;
-			}
-			else if(mid == guess)
-			{
-				System.out.println("The guess number is:"+mid);
+			} else if (mid == guess) {
+				System.out.println("The guess number is:" + mid);
 				break;
-			}
-			else
-			{
+			} else {
 				System.out.println("Enter a valid number:");
 				break;
 			}
 		}
-		scanner.close();
 	}
 
 	/****
-	 * This program binarySearch for integer an prints an output in sorted form
+	 * This program is to find day of week
 	 ****/
 
-	public static int binarySearch(int[] array, int key) {
-		int left=0;
-		int right= array.length-1;
-
-		while (left <= right)
-		{
-			int mid = (left + (array.length-1))/2;
-			if(array[mid] == key)
-				System.out.println("Element found" +array[mid]);
-
-			if(array[mid] < key)
-			{
-				left=array[mid] +1;
-
-			}
-			else
-			{
-				right=array[mid]-1;
-			}
-			return 1;
-		}
-		return -1;
-	}
-	/****
-	 This program is to find day of week
-	 ****/
-
-	public static int dayOfWeek(int month,int day,int year)
-	{
-		System.out.println("Entered date is : " +month+"/"+day+"/"+year);
-		int y0 = year - (14 -month) / 12;
-		int x = y0 + y0/4 - y0/100 + y0/400;
-		int m0 =month + 12*((14 -month ) / 12) - 2;
-		int d0 = ( day + x + 31*m0/12)%7;
+	public static int dayOfWeek(int month, int day, int year) {
+		System.out.println("Entered date is : " + month + "/" + day + "/" + year);
+		int y0 = year - (14 - month) / 12;
+		int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
+		int m0 = month + 12 * ((14 - month) / 12) - 2;
+		int d0 = (day + x + 31 * m0 / 12) % 7;
 		return d0;
 	}
 
-	/**** This program to calculate the minimum number of Notes 
-	 as well as the Notes to be returned by the Vending Machine
-	  as a Change ****/
+	/****
+	 * This program to calculate the minimum number of Notes as well as the
+	 * Notes to be returned by the Vending Machine as a Change
+	 ****/
 
 	public static void vendingMachine(int amount) {
 		// TODO Auto-generated method stub
-		int currency[]={1, 2, 5, 10, 20, 50, 100, 500, 1000};
-		for(int i=amount-1; i>=0; i--)
-		{
+		int currency[] = { 1, 2, 5, 10, 20, 50, 100, 500, 1000 };
+		for (int i = amount - 1; i >= 0; i--) {
 
 		}
 	}
 
-
 }
-

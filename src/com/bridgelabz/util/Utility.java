@@ -18,6 +18,8 @@ import java.util.regex.Pattern;
 public class Utility {
 	static Scanner scanner = new Scanner(System.in);
 	static PrintWriter writer = new PrintWriter(System.out, true);
+	public static String total;
+	private static int t;
 
 	/**
 	 * This method takes User Input and Replace String Template“Hello
@@ -502,6 +504,7 @@ public class Utility {
 			return binarySearch(array, key, mid + 1, right);
 	}
 	
+	
 	/**
 	 * This method prints a sorted array
 	 * 
@@ -514,11 +517,132 @@ public class Utility {
 
 	}
 
+	/**
+	 * This method takes a command-line argument N, asks you to think of a
+	 * number between 0 and N-1,and always guesses the answer with n questions.
+	 * 
+	 * @param low
+	 * @param high
+	 * @return
+	 */
+	public static int search(int low, int high) {
+		if ((high - low) == 1)
+			return low;
+		int mid = low + (high - low) / 2;
+		System.out.printf("Is it less than %d?  ", mid);
+		System.out.println();
+		System.out.println("Enter the true or false to find your number");
+		boolean b = scanner.nextBoolean();
+		if (b)
+			return search(low, mid);
+		else
+			return search(mid, high);
+	}
+	
+	/**This method l is for left index and r is right
+	 *  index of the sub-array of array to be sorted
+	 * @param array
+	 */
+	public static void mergesort(int[] array) {
+		int number=array.length;
+		
+		if(number<2)
+		return;
+		
+		int mid=number/2;
+		
+		int left[]=new int[mid];
+		int right[]=new int[number-mid];
+		
+		for(int i=0;i<mid;i++)
+			left[i]=array[i];
+		for(int i=mid;i<number;i++)
+			right[i-mid]=array[i];
+		
+		mergesort(left);
+		mergesort(right);
+		merge(left,right,array);
+	}
+	/**This method merges two sub-arrays
+	 * @param left
+	 * @param right
+	 * @param array
+	 */
+	public static void merge(int[] left,int[] right,int[]array) {
+		
+		int i=0,j=0,k=0;
+		
+		while(i<left.length && j<right.length) {
+			if(left[i]<right[j]) {
+				array[k]=left[i];
+				i++;
+			}else if(right[j]<left[i]){
+				array[k]=right[j];
+				j++;
+			}
+			k++;
+		}
+		while(i<left.length) {
+			array[k++]=left[i];
+			i++;
+		}
+		while(j<right.length) {
+			array[k++]=right[j];
+			j++;
+		}
+	}
+	/**This method prints the array
+	 * @param array
+	 */
+	public static void printArray(int[] array) {
+		 System.out.println("Sorted array list :");
+			for(int i=0;i<array.length;i++)
+				System.out.print(array[i]+" ");
+		}
+
 	/****
+	 * This program to calculate the minimum number of Notes as well as the
+	 * Notes to be returned by the Vending Machine as a Change
+	 ****/
+	public static int vendingMachine(int notes[],int amount,int length)
+	{
+		int count=0;
+		for (int i=length-1; i>=0; i--)
+		{
+			while(amount >= notes[i])
+			{
+				amount -= notes[i];
+				System.out.print("Amount contains notes of:");
+				System.out.println(+notes[i]);
+				count++;
+			}
+		}
+		System.out.println();
+		return count;
+	}
+
+	/**
+	 * This program is to find day of week
+	 
+	 * @param month
+	 * @param day
+	 * @param year
+	 * @return
+	 */
+	public static int dayOfWeek(int month, int day, int year) {
+		System.out.println("Entered date is : " + month + "/" + day + "/" + year);
+		int y0 = year - (14 - month) / 12;
+		int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
+		int m0 = month + 12 * ((14 - month) / 12) - 2;
+		int d0 = (day + x + 31 * m0 / 12) % 7;
+		return d0;
+	}
+	
+	/**
 	 * This method takes temperature input in fahrenheit, outputs the
 	 * temperature in Celsius or viceversa
-	 ****/
-
+	 */
+	
 	public static void temperatureConversion() {
 		// TODO Auto-generated method stub
 		System.out.println("\nEnter 1 for Fahrenheit to Celsius" + "\nEnter 2 for Celsius to Fahrenheit"
@@ -536,6 +660,9 @@ public class Utility {
 
 	}
 
+	/**This method converts celcius to fahrenhiet
+	 * 
+	 */
 	private static void celsiusToFahrenheit() {
 		// TODO Auto-generated method stub
 		Double celsius = scanner.nextDouble();
@@ -543,6 +670,9 @@ public class Utility {
 		temperatureConversion();
 	}
 
+	/**This method converts fehrenhiet to celcius
+	 * 
+	 */
 	private static void fahrenheitToCelsius() {
 		// TODO Auto-generated method stub
 		Double Fahrenheit = scanner.nextDouble();
@@ -550,65 +680,50 @@ public class Utility {
 		temperatureConversion();
 	}
 
-	/**
-	 * This method takes a command-line argument N, asks you to think of a
-	 * number between 0 and N-1,and always guesses the answer with n questions.
-	 * 
-	 * @param number
+	/**This method calculates the monthly payment using formula
+	 * @param principalLoan
+	 * @param years
+	 * @param rateOfInterest
 	 */
-	public void search(int number) {
-		// TODO Auto-generated method stub
-		System.out.println("Guess a number:");
-		int guess = scanner.nextInt();
-		for (int i = 1; i <= number - 1;) {
-			int first = 1;
-			int last = number - 1;
-			int mid = (first + last) / 2;
+	public static void monthlyPayment(int principalLoan,int years,double rateOfInterest) {
+	
+		int n=12*years;
+		double result= rateOfInterest/(12*100);
+		double payment=(principalLoan*result)/(1-Math.pow(1+result, (-n)));
+		
+		System.out.println("The output is...."+payment);
+	}
 
-			System.out.println("");
-
-			if (mid > guess) {
-				mid = mid + 1;
-				System.out.println("The guess number is:" + mid);
-				break;
-			} else if (mid < guess) {
-				mid = mid - 1;
-				System.out.println("The guess number is:" + mid);
-				break;
-			} else if (mid == guess) {
-				System.out.println("The guess number is:" + mid);
-				break;
-			} else {
-				System.out.println("Enter a valid number:");
-				break;
-			}
+	/**This method used to calculate square root
+	 * @param c
+	 */
+	public static void sqrt(int c) {
+		double t = c;
+		double epsilon= 1e-15;
+		while(Math.abs(t - c/t) > (epsilon*t) )
+		{
+			t=(c/t+t)/2.0;
+			
 		}
+		System.out.println("The Result is.."+t);
 	}
 
-	/****
-	 * This program is to find day of week
-	 ****/
-
-	public static int dayOfWeek(int month, int day, int year) {
-		System.out.println("Entered date is : " + month + "/" + day + "/" + year);
-		int y0 = year - (14 - month) / 12;
-		int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
-		int m0 = month + 12 * ((14 - month) / 12) - 2;
-		int d0 = (day + x + 31 * m0 / 12) % 7;
-		return d0;
-	}
-
-	/****
-	 * This program to calculate the minimum number of Notes as well as the
-	 * Notes to be returned by the Vending Machine as a Change
-	 ****/
-
-	public static void vendingMachine(int amount) {
-		// TODO Auto-generated method stub
-		int currency[] = { 1, 2, 5, 10, 20, 50, 100, 500, 1000 };
-		for (int i = amount - 1; i >= 0; i--) {
-
+	/**This method converts the decimal number
+	 * @param decimal
+	 * @return
+	 */
+	public static String convertBinary(int decimal) {
+		String binary="";
+		while(decimal>0) {
+			binary=decimal%2+binary;
+			decimal=decimal/2;
 		}
+		System.out.println("The binary number corresponding to decimal:" +binary);
+		//char[] array=binary.toCharArray(); 
+		//System.out.println("" +array);
+		
+		return binary;
 	}
 
+	
 }

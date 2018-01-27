@@ -51,6 +51,5 @@ public class BinarySearch {
 			System.out.println("Element not Found..");
 	
 		scanner.close();
-		
 	}
 }

@@ -26,7 +26,6 @@ public class DayOfWeek {
 		int year=scanner.nextInt();
 		int result = Utility.dayOfWeek(month,day,year);
 		System.out.println(array[result]);
-		scanner.close();
-			
+		scanner.close();	
 	}
 }

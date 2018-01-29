@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 import com.bridgelabz.util.Utility;
 
+/**Purpose: This program to do Merge Sort of input array elements 
+
+ * @author Sana Shaikh
+ *@since 13/01/2018
+ */
 public class MergeSort {
 
 	public static void main(String[] args) {

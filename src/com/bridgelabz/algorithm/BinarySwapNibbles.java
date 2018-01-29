@@ -4,20 +4,18 @@ import java.util.Scanner;
 
 import com.bridgelabz.util.Utility;
 
-/**Purpose: This program  outputs the binary (base 2) 
- * representation of the decimal 
- * @author Sana shaikh
- *@since   13/01/2018   
- */
-public class ToBinary {
+public class BinarySwapNibbles {
 
 	public static void main(String[] args) {
-
+		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the number:");
 		int number = scanner.nextInt();
 		Utility.toBinary(number);
-	
+		
 		scanner.close();
+
 	}
+	//unsigned char swapNibbles()
+
 }

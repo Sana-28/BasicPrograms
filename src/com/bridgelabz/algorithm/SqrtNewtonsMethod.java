@@ -7,7 +7,7 @@ import com.bridgelabz.util.Utility;
 /**Purpose: This program computes the square root of a
  *  nonnegative number c given in the input using 
  *  Newton's method:
- * @author Sana Shaikh
+ *@author Sana Shaikh
  *@since   13/01/2018   
  */
 public class SqrtNewtonsMethod {

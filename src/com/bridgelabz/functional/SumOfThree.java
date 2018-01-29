@@ -9,7 +9,6 @@ import com.bridgelabz.util.Utility;
 
  * @author SanaShaikh
  * @since  13/01/2018 
- *
  */
 public class SumOfThree {
 

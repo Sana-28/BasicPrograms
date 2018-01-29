@@ -3,6 +3,13 @@ package com.bridgelabz.algorithm;
 import java.util.Scanner;
 import com.bridgelabz.util.Utility;
 
+/**Purpose:This program takes a command-line argument N,
+ *  asks you to think of a number between 0 and N-1
+ *  and prints your guessing number
+ * @authorSana Shaikh
+ * @since   13/01/2018   
+ *
+ */
 public class QuestionFindNumber {
 
 	public static void main(String[] args) {

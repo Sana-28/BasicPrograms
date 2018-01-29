@@ -13,5 +13,6 @@ public class PalindromePrime
 	{
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter a number:");
+		scanner.close();
 	}
 }

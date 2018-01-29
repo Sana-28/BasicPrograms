@@ -22,6 +22,7 @@ public class BinarySearch {
 			array[i] = scanner.nextInt();
 		}
 		Arrays.sort(array);
+		System.out.println(""+array);
 		System.out.println("Enter the Key Element to Search..");
 		int key1=scanner.nextInt();
 	

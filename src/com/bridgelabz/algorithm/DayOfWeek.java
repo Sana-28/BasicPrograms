@@ -20,11 +20,11 @@ public class DayOfWeek {
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter month:");
 		int month=scanner.nextInt();
-		System.out.println("Enter day");
-		int day=scanner.nextInt();
+		System.out.println("Enter date");
+		int date=scanner.nextInt();
 		System.out.println("Enter year");
 		int year=scanner.nextInt();
-		int result = Utility.dayOfWeek(month,day,year);
+		int result = Utility.dayOfWeek(month,date,year);
 		System.out.println(array[result]);
 		scanner.close();	
 	}

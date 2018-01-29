@@ -13,14 +13,44 @@ public class TicTacToe
 {
 	public static void main(String args[])
 	{
-	int a[][]=new int[3][3];
-	int choice;
-	Scanner sc=new Scanner(System.in);
-	
+		int board[][]=new int[3][3];
+		initializeBoard();
+		printBoard();
+		/*int choice;
+	Scanner scanner=new Scanner(System.in);
+
 	System.out.println("Where do you want to insert?");
 	System.out.println("Enter row number:");
-	int row=sc.nextInt();
+	int row=scanner.nextInt();
 	System.out.println("Enter column number:");
-	int col=sc.nextInt();
+	int col=scanner.nextInt();
+		 */
+	}
+	public static void initializeBoard()
+	{
+		for(int i=0;i<3;i++)
+		{
+			for(int j=0;j<3;j++)
+			{
+				java.lang.String[][] array = null;
+				array[i][j]="0";
+			}
+		}
+	}
+	public static void printBoard()
+	{
+		System.out.println("-----");
+		for(int i=0; i<3;i++)
+		{
+			System.out.println("|");
+			for(int j=0;j<3;j++)
+			{
+				java.lang.String[][] board = null;
+				System.out.println(board[i][j]+ "|");
+			}
+			System.out.println();
+			System.out.println("-------");
+		}
+
 	}
 }

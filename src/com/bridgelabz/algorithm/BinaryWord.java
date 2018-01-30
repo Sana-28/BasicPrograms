@@ -1,7 +1,9 @@
 package com.bridgelabz.algorithm;
 
-import java.util.*;
+import java.io.*;
 import java.util.Arrays;
+
+import com.bridgelabz.util.Utility;
 
 /**Purpose: This program reads in a list of words,
  *and prints the result if the word is found or not
@@ -9,30 +11,35 @@ import java.util.Arrays;
  * @since   13/01/2018   
  */
 public class BinaryWord {
-	public static void main(String[] args) 
+	
+	static String string = null;
+	String search;
+	private static BufferedReader buffer;
+
+	public static void main(String[] args) throws IOException 
 	{
-		int i;  
-		Scanner scanner = new Scanner(System.in);
+		  File file = new File("/home/bridgelabz/Documents/file.txt");
+		  FileReader read = new FileReader(file);
+		  buffer = new BufferedReader(read);
+		  
+		  if(file.exists())
+			{
+				if(file.canRead())
+				{
 
-		System.out.println("Enter number of words you wish to input: ");
-		int input=scanner.nextInt();
-
-		String[] words= new String[input];
-
-		System.out.println("Enter the words");
-		for ( i = 0; i < words.length; i++)
-		{
-			System.out.print("Word " + (i + 1) + ": ");
-			words[i] = scanner.next();
-		}
-
-		System.out.println("enter the word you want to search for");
-		String word=scanner.next();
-
-		Arrays.sort(words);
-		int index= Arrays.binarySearch(words,word);
-		System.out.println(word+ "="+ index);
-
+					string = buffer.readLine();
+				}
+				else
+				{
+					System.out.println("File can not read");
+				}
+			}
+			else
+			{
+				System.out.println("File not found");
+			}
+		// Utility.bubbleSort(array);
+		  
 
 	}
 }

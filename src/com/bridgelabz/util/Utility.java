@@ -9,8 +9,9 @@
 package com.bridgelabz.util;
 
 import java.io.PrintWriter;
+
+
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,6 +21,30 @@ public class Utility {
 	static PrintWriter writer = new PrintWriter(System.out, true);
 	public static String total;
 	private static int t;
+
+	public Utility() {
+		scanner = new Scanner(System.in);
+	}
+
+	public int getInteger() {
+		return scanner.nextInt();
+
+	}
+
+	public boolean getBoolean() {
+		return scanner.nextBoolean();
+
+	}
+
+	public double getDouble() {
+		return scanner.nextDouble();
+
+	}
+
+	public String getString() {
+		return scanner.next();
+
+	}
 
 	/**
 	 * This method takes User Input and Replace String Template“Hello
@@ -55,8 +80,8 @@ public class Utility {
 		System.out.println("headCount=" + headCount);
 		System.out.println("tailCount=" + tailCount);
 
-		System.out.println("per of heads " + (((headCount)) * 100) / input + " %");
-		System.out.println("per of tails " + (((tailCount)) * 100) / input + " %");
+		System.out.println("per of heads " + ((headCount) * 100) / input + " %");
+		System.out.println("per of tails " + ((tailCount) * 100) / input + " %");
 	}
 
 	/**
@@ -162,15 +187,16 @@ public class Utility {
 
 	/**
 	 * This method generates distinct coupon number
+	 * 
 	 * @param number
 	 */
 	public static void couponNumber(int number) {
 
 		int[] array = new int[number];
-		int count=0;
+		// int count=0;
 		for (int i = 0; i < array.length; i++) {
 			array[i] = (int) (Math.random() * number);
-			
+
 			for (int j = 0; j < i; j++) {
 				if (array[i] == array[j]) {
 					i--;
@@ -289,7 +315,7 @@ public class Utility {
 		double distance;
 		distance = Math.sqrt((initial1 * final1) + (initial2 * final2));
 		System.out.println("Distance between initial and final points" + distance);
-		System.out.println("" +Math.round (distance * 10000.0) / 10000.0);  
+		System.out.println("" + Math.round(distance * 10000.0) / 10000.0);
 
 	}
 
@@ -321,47 +347,59 @@ public class Utility {
 		return String.valueOf(charArray);
 	}
 
-
-	/**Iterative method to find permutation of string
+	/**
+	 * Iterative method to find permutation of string
+	 * 
 	 * @param string
 	 * @param length
 	 */
 	public static void permutations(String string, int length) {
-		//sort the string in natural order
-		char[] s = string.toCharArray();
-		Arrays.sort(s);
+		char[] str = string.toCharArray();
+		Arrays.sort(str);
 
-		while (true)
-		{
-			System.out.print(String.valueOf(s) + " ");
+		while (true) {
+			System.out.print(String.valueOf(str) + " ");
 
-			int i = length- 1;
-			while (s[i-1] >= s[i])
-			{
+			int i = length - 1;
+			while (str[i - 1] >= str[i]) {
 				if (--i == 0)
 					return;
 			}
-			int j = length- 1;
-			while (j > i && s[j] <= s[i-1])
+			int j = length - 1;
+			while (j > i && str[j] <= str[i - 1])
 				j--;
-			
-			swap(s, i-1, j);
-			reverse (s, i, length-1);
+
+			swap(str, i - 1, j);
+			reverse(str, i, length - 1);
 		}
-	}
-	private static void swap(char[] arr, int i, int j) {
-		char c = arr[i];
-		arr[i] = arr[j];
-		arr[j] = c;
 	}
 
-	private static void reverse(char[] arr, int i, int j)
-	{
+	/**
+	 * This method is to swap the string
+	 * 
+	 * @param array
+	 * @param i
+	 * @param j
+	 */
+	private static void swap(char[] array, int i, int j) {
+		char c = array[i];
+		array[i] = array[j];
+		array[j] = c;
+	}
+
+	/**
+	 * This method is to reverse the string
+	 * 
+	 * @param array
+	 * @param i
+	 * @param j
+	 */
+	private static void reverse(char[] array, int i, int j) {
 		while (i < j) {
-			swap(arr, i++, j--);
+			swap(array, i++, j--);
 		}
 	}
-	
+
 	/**
 	 * This method calculates the time between start and stop watch
 	 * 
@@ -379,7 +417,8 @@ public class Utility {
 		System.out.println("Stop Time." + stopTime);
 
 		long elapsedTime = stopTime - startTime;
-		// System.out.println("Elapsed time between start and stop.." +elapsedTime);
+		// System.out.println("Elapsed time between start and stop.."
+		// +elapsedTime);
 		System.out.println("Elapsed time: " + (elapsedTime / 1000) % 60 + "sec");
 	}
 
@@ -435,8 +474,9 @@ public class Utility {
 	public static boolean isAnagram(String string1, String string2) {
 		// int n1=string1.length();
 		// int n2=string2.length();
-		char n1[] = string1.toLowerCase().toCharArray();
-		char n2[] = string2.toLowerCase().toCharArray();
+		char n1[] = string1.replace(" ", "").toLowerCase().toCharArray();
+		char n2[] = string2.replace(" ", "").toLowerCase().toCharArray();
+
 		Arrays.sort(n1);
 		Arrays.sort(n2);
 
@@ -456,13 +496,15 @@ public class Utility {
 			}
 		}
 		return true;
-		//System.out.println(string1.compareTo(string2));
+		// System.out.println(string1.compareTo(string2));
 	}
 
 	/****
 	 * This method is to find prime number between a given range
 	 ****/
 	public void prime(int lowerLimit, int upperLimit) {
+		System.out.println("Prime numbers between " +lowerLimit+ "-" +upperLimit);
+
 		for (int i = lowerLimit; i <= upperLimit; i++) {
 			int flag = 0;
 			for (int j = 2; j < i; j++) {
@@ -474,9 +516,34 @@ public class Utility {
 				}
 			}
 			if (flag == 1) {
-				System.out.println("Prime number:"+i);
+				String arr="" +i;
+				System.out.println(""+arr);
+				int[] array=new int[upperLimit];
+				Utility.palindromeNumber(array);
 			}
 		}
+	}
+	
+	public static int[] palindromeNumber(int[] array)
+	{
+		System.out.println("palindrome prime numbers are:");
+		for(int i=0;i<array.length;i++)
+		{
+			int num = array[i];
+			int temp = num;
+			int sum=0;
+			while (temp!=0)
+			{
+				int rem = temp%10;
+				sum = (sum*10)+rem;
+				temp = temp/10;
+			}
+			if (num == sum)
+			{
+				System.out.println("");
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -543,7 +610,6 @@ public class Utility {
 			return binarySearch(array, key, mid + 1, right);
 	}
 
-
 	/**
 	 * This method prints a sorted array
 	 * 
@@ -578,74 +644,73 @@ public class Utility {
 			return search(mid, high);
 	}
 
-	/**This method search for a word
-	 * @param a
-	 * @param key
-	 * @return
-	 */
-	public static int binarySearchWord(Object[] a, Object key) {
-		return binarySearchWord(a, 0);
-	}
-
-	/**This method l is for left index and r is right
-	 *  index of the sub-array of array to be sorted
+	/**
+	 * This method l is for left index and r is right index of the sub-array of
+	 * array to be sorted
+	 * 
 	 * @param array
 	 */
 	public static void mergesort(int[] array) {
-		int number=array.length;
+		int number = array.length;
 
-		if(number<2)
+		if (number < 2)
 			return;
 
-		int mid=number/2;
+		int mid = number / 2;
 
-		int left[]=new int[mid];
-		int right[]=new int[number-mid];
+		int left[] = new int[mid];
+		int right[] = new int[number - mid];
 
-		for(int i=0;i<mid;i++)
-			left[i]=array[i];
-		for(int i=mid;i<number;i++)
-			right[i-mid]=array[i];
+		for (int i = 0; i < mid; i++)
+			left[i] = array[i];
+		for (int i = mid; i < number; i++)
+			right[i - mid] = array[i];
 
 		mergesort(left);
 		mergesort(right);
-		merge(left,right,array);
+		merge(left, right, array);
 	}
-	/**This method merges two sub-arrays
+
+	/**
+	 * This method merges two sub-arrays
+	 * 
 	 * @param left
 	 * @param right
 	 * @param array
 	 */
-	public static void merge(int[] left,int[] right,int[]array) {
+	public static void merge(int[] left, int[] right, int[] array) {
 
-		int i=0,j=0,k=0;
+		int i = 0, j = 0, k = 0;
 
-		while(i<left.length && j<right.length) {
-			if(left[i]<right[j]) {
-				array[k]=left[i];
+		while (i < left.length && j < right.length) {
+			if (left[i] < right[j]) {
+				array[k] = left[i];
 				i++;
-			}else if(right[j]<left[i]){
-				array[k]=right[j];
+			} else if (right[j] < left[i]) {
+				array[k] = right[j];
 				j++;
 			}
 			k++;
 		}
-		while(i<left.length) {
-			array[k++]=left[i];
+		while (i < left.length) {
+			array[k++] = left[i];
 			i++;
 		}
-		while(j<right.length) {
-			array[k++]=right[j];
+		while (j < right.length) {
+			array[k++] = right[j];
 			j++;
 		}
 	}
-	/**This method prints the array
+
+	/**
+	 * This method prints the array
+	 * 
 	 * @param array
 	 */
 	public static void printArray(int[] array) {
 		System.out.println("Sorted array list :");
-		for(int i=0;i<array.length;i++)
-			System.out.print(array[i]+" ");
+		for (int i = 0; i < array.length; i++)
+			System.out.print(array[i] + " ");
 	}
 
 	/**
@@ -657,13 +722,10 @@ public class Utility {
 	 * @param length
 	 * @return
 	 */
-	public static int vendingMachine(int notes[],int amount,int length)
-	{
-		int count=0;
-		for (int i=length-1; i>=0; i--)
-		{
-			while(amount >= notes[i])
-			{
+	public static int vendingMachine(int notes[], int amount, int length) {
+		int count = 0;
+		for (int i = length - 1; i >= 0; i--) {
+			while (amount >= notes[i]) {
 				amount -= notes[i];
 				System.out.print("Amount contains notes of:");
 				System.out.println(+notes[i]);
@@ -676,7 +738,7 @@ public class Utility {
 
 	/**
 	 * This program is to find day of week
-
+	 * 
 	 * @param month
 	 * @param day
 	 * @param year
@@ -713,7 +775,8 @@ public class Utility {
 
 	}
 
-	/**This method converts celcius to fahrenhiet
+	/**
+	 * This method converts celcius to fahrenhiet
 	 * 
 	 */
 	private static void celsiusToFahrenheit() {
@@ -723,7 +786,8 @@ public class Utility {
 		temperatureConversion();
 	}
 
-	/**This method converts fehrenhiet to celcius
+	/**
+	 * This method converts fehrenhiet to celcius
 	 * 
 	 */
 	private static void fahrenheitToCelsius() {
@@ -733,79 +797,79 @@ public class Utility {
 		temperatureConversion();
 	}
 
-	/**This method calculates the monthly payment using formula
+	/**
+	 * This method calculates the monthly payment using formula
+	 * 
 	 * @param principalLoan
 	 * @param years
 	 * @param rateOfInterest
 	 */
-	public static void monthlyPayment(int principalLoan,int years,double rateOfInterest) {
+	public static void monthlyPayment(int principalLoan, int years, double rateOfInterest) {
 
-		int n=12*years;
-		double result= rateOfInterest/(12*100);
-		double payment=(principalLoan*result)/(1-Math.pow(1+result, (-n)));
+		int n = 12 * years;
+		double result = rateOfInterest / (12 * 100);
+		double payment = (principalLoan * result) / (1 - Math.pow(1 + result, (-n)));
 
-		System.out.println("The output is...."+payment);
+		System.out.println("The output is...." + payment);
 	}
 
-	/**This method used to calculate square root
+	/**
+	 * This method used to calculate square root
+	 * 
 	 * @param c
 	 */
 	public static void sqrt(int c) {
 		double t = c;
-		double epsilon= 1e-15;
-		while(Math.abs(t - c/t) > (epsilon*t) )
-		{
-			t=(c/t+t)/2.0;
+		double epsilon = 1e-15;
+		while (Math.abs(t - c / t) > (epsilon * t)) {
+			t = (c / t + t) / 2.0;
 
 		}
-		System.out.println("The Result is.."+t);
+		System.out.println("The Result is.." + t);
 	}
 
-	/**This method converts the decimal number
+	/**
+	 * This method converts the decimal number
+	 * 
 	 * @param decimal
 	 * @return
 	 */
 	public static String toBinary(int decimal) {
-		String binary="";
-		while(decimal>0) {
-			binary=decimal%2+binary;
-			decimal=decimal/2;
+		String binary = "";
+		while (decimal > 0) {
+			binary = decimal % 2 + binary;
+			decimal = decimal / 2;
 		}
-		System.out.println("The binary number corresponding to decimal:" +(binary));
-		char[] array=binary.toCharArray(); 
-		
+		System.out.println("The binary number corresponding to decimal:" + (binary));
+		char[] array = binary.toCharArray();
+
 		double sum = 0;
-		int result=(int) toDecimal(array,sum);
+		int result = (int) toDecimal(array, sum);
 		isPowerOfTWo(result);
 		System.out.println(isPowerOfTWo(+result) ? "Number is power of two" : "Number is not power of two");
 		return binary;
 	}
-	static boolean isPowerOfTWo(int result)
-	{
-		return result!=0 && ((result&(result-1)) == 0);
+
+	static boolean isPowerOfTWo(int result) {
+		return result != 0 && ((result & (result - 1)) == 0);
 	}
 
-	private static double toDecimal(char[] array, double sum) 
-	{
-		int temp=0;
-		String powerTwo="";
-		//System.out.println("" +arr.length);
-		for (int i=array.length-1;i>=0;i--)
-		{
-			if(array[i]=='1')
-			{
-				sum=sum+(Math.pow(2, temp));
-				if(temp<array.length-1)
-					powerTwo=powerTwo+(Math.pow(2, temp))+ "+";
+	private static double toDecimal(char[] array, double sum) {
+		int temp = 0;
+		String powerTwo = "";
+		// System.out.println("" +array.length);
+		for (int i = array.length - 1; i >= 0; i--) {
+			if (array[i] == '1') {
+				sum = sum + (Math.pow(2, temp));
+				if (temp < array.length - 1)
+					powerTwo = powerTwo + (Math.pow(2, temp)) + "+";
 				else
-					powerTwo=powerTwo+(Math.pow(2,temp))+ "=";
+					powerTwo = powerTwo + (Math.pow(2, temp)) + "=";
 			}
 			temp++;
 		}
 		System.out.print(powerTwo);
 		System.out.println(sum);
 		return sum;
+	}
 }
-
-}
-

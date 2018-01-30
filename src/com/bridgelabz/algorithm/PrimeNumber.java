@@ -1,13 +1,11 @@
 /***********************************************
- * Purpose :This program is to find prime number between a given range 
-
+ * Purpose :This program is to find prime number between a given range
        
  * @author  Sana Shaikh
  * @version 1.0
  * @since   13/01/2018         
  ***********************************************/
 package com.bridgelabz.algorithm;
-
 import java.util.Scanner;
 
 import com.bridgelabz.util.Utility;
@@ -23,5 +21,7 @@ public class PrimeNumber {
 
 		Utility utility = new Utility();
 		utility.prime(lowerLimit, upperLimit);
+		//utility.isAnagram(string1, string2);
+		
 	}
 }

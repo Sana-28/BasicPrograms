@@ -1,45 +1,50 @@
 package com.bridgelabz.algorithm;
 
 import java.io.*;
-import java.util.Arrays;
 
 import com.bridgelabz.util.Utility;
 
-/**Purpose: This program reads in a list of words,
- *and prints the result if the word is found or not
+/**
+ * Purpose: This program reads in a list of words, and prints the result if the
+ * word is found or not
+ * 
  * @author Sana Shaikh
- * @since   13/01/2018   
+ * @since 13/01/2018
  */
 public class BinaryWord {
-	
-	static String string = null;
-	String search;
-	private static BufferedReader buffer;
 
-	public static void main(String[] args) throws IOException 
-	{
-		  File file = new File("/home/bridgelabz/Documents/file.txt");
-		  FileReader read = new FileReader(file);
-		  buffer = new BufferedReader(read);
-		  
-		  if(file.exists())
-			{
-				if(file.canRead())
-				{
+	public static void main(String[] args) throws IOException {
+		try {
+			String key;
+			String word = null;
+			File file = new File("/home/bridgelabz/Documents/file.txt");
+			if (file.exists()) {
+				if (file.canRead()) {
+					BufferedReader bufferReader = new BufferedReader(new FileReader(file));
+					word = bufferReader.readLine();
+					System.out.println("File data:" + "\n" + word);
 
-					string = buffer.readLine();
+					bufferReader.close();
+					String[] str = word.trim().split(" ");
+					String[] string = Utility.bubbleSort(str);
+					Utility.printArray(string);
+					System.out.println("\n" + "\n" + "Enter the Key To search..");
+					key = Utility.getString();
+
+					if (Utility.binarySearch(string, key, 0, string.length - 1) > 0) {
+						System.out.println("Element is found......");
+					} else {
+						System.out.println("Not Found......");
+					}
+				} else {
+					System.out.println("File cannot read");
 				}
-				else
-				{
-					System.out.println("File can not read");
-				}
-			}
-			else
-			{
+			} else {
 				System.out.println("File not found");
 			}
-		// Utility.bubbleSort(array);
-		  
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 }

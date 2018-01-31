@@ -8,50 +8,79 @@
 
 package com.bridgelabz.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
-
-
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
+import com.sun.javafx.fxml.expression.Expression;
+
+/**
+ * @author bridgelabz
+ *
+ */
+/**
+ * @author bridgelabz
+ *
+ */
+/**
+ * @author bridgelabz
+ *
+ */
 public class Utility {
 	static Scanner scanner = new Scanner(System.in);
 	static PrintWriter writer = new PrintWriter(System.out, true);
 	public static String total;
 	private static int t;
 
+	/**
+	 * This method to take input from user
+	 */
 	public Utility() {
 		scanner = new Scanner(System.in);
 	}
 
-	public int getInteger() {
+	public static int getInteger() {
 		return scanner.nextInt();
 
 	}
 
-	public boolean getBoolean() {
+	public static boolean getBoolean() {
 		return scanner.nextBoolean();
 
 	}
 
-	public double getDouble() {
+	public static double getDouble() {
 		return scanner.nextDouble();
 
 	}
 
-	public String getString() {
+	public static String getString() {
 		return scanner.next();
 
 	}
 
+	/**
+	 * FUNCTIONAL LOGICS
+	 */
+	
 	/**
 	 * This method takes User Input and Replace String Template“Hello
 	 * <<UserName>>, How are you?”
 	 * 
 	 * @param input
 	 */
+	
 	public static void userName(String input) {
 		String REGEX = "<<UserName>>";
 		String INPUT = "Hello <<UserName>> , How are you?";
@@ -464,6 +493,11 @@ public class Utility {
 		return windchill;
 	}
 
+	
+	/**
+	 *AlGORITHM LOGICS
+	 */
+	
 	/****
 	 * This method is to find the one string anagram of another
 	 * 
@@ -501,10 +535,13 @@ public class Utility {
 
 	/****
 	 * This method is to find prime number between a given range
+	 * 
+	 * @return
 	 ****/
-	public void prime(int lowerLimit, int upperLimit) {
-		System.out.println("Prime numbers between " +lowerLimit+ "-" +upperLimit);
+	public String prime(int lowerLimit, int upperLimit) {
+		System.out.println("Prime numbers between " + lowerLimit + "-" + upperLimit);
 
+		String primeNumber = null;
 		for (int i = lowerLimit; i <= upperLimit; i++) {
 			int flag = 0;
 			for (int j = 2; j < i; j++) {
@@ -516,34 +553,51 @@ public class Utility {
 				}
 			}
 			if (flag == 1) {
-				String arr="" +i;
-				System.out.println(""+arr);
-				int[] array=new int[upperLimit];
-				Utility.palindromeNumber(array);
+				primeNumber = "" + i;
+				String[] anagram = primeNumber.split(" ", +i);
+				System.out.println(primeNumber);
+				for (String a : anagram)
+					System.out.println(a);
 			}
 		}
+		return primeNumber;
 	}
-	
-	public static int[] palindromeNumber(int[] array)
-	{
-		System.out.println("palindrome prime numbers are:");
-		for(int i=0;i<array.length;i++)
-		{
-			int num = array[i];
-			int temp = num;
-			int sum=0;
-			while (temp!=0)
-			{
-				int rem = temp%10;
-				sum = (sum*10)+rem;
-				temp = temp/10;
-			}
-			if (num == sum)
-			{
-				System.out.println("");
-			}
+
+	public static boolean anagramDetection(String anagram1, String anagram2) {
+
+		char char1[] = anagram1.toCharArray();
+		char char2[] = anagram2.toCharArray();
+		Arrays.sort(char1);
+		Arrays.sort(char2);
+		String string1 = String.valueOf(char1);
+		String string2 = String.valueOf(char2);
+
+		if (!string1.equals(string2))
+			return false;
+
+		return true;
+	}
+
+	public static void palindromeNumber(String[] anagramNumber) {
+		// Object arraysAnagram;
+		int[] numbers = new int[anagramNumber.length];
+		for (int i = 0; i < anagramNumber.length; i++) {
+			numbers[i] = Integer.parseInt(anagramNumber[i]);
 		}
-		return null;
+		int temp, reverse_num, rem = 0, i = 0, num = 0;
+		while (i < numbers.length) {
+			temp = numbers[i];
+			num = temp;
+			reverse_num = 0;
+			while (temp != 0) {
+				rem = temp % 10;
+				temp = temp / 10;
+				reverse_num = reverse_num * 10 + rem;
+			}
+			i++;
+			if (num == reverse_num)
+				System.out.print(" " + num);
+		}
 	}
 
 	/**
@@ -589,7 +643,8 @@ public class Utility {
 	}
 
 	/**
-	 * This method search a element in sorted list using binary search
+	 * This method search a element in sorted list using binary search Generic
+	 * method to search integer as well as string
 	 * 
 	 * @param array
 	 * @param key
@@ -616,9 +671,9 @@ public class Utility {
 	 * @param array
 	 */
 	public static <T> void printArray(T[] array) {
-		System.out.println("Sorted array list :");
+		System.out.println("\n" + "Sorted list :");
 		for (int i = 0; i < array.length; i++)
-			System.out.println(array[i] + " ");
+			System.out.print(array[i] + " " + "\n");
 
 	}
 
@@ -840,21 +895,17 @@ public class Utility {
 			binary = decimal % 2 + binary;
 			decimal = decimal / 2;
 		}
-		System.out.println("The binary number corresponding to decimal:" + (binary));
-		char[] array = binary.toCharArray();
-
-		double sum = 0;
-		int result = (int) toDecimal(array, sum);
-		isPowerOfTWo(result);
-		System.out.println(isPowerOfTWo(+result) ? "Number is power of two" : "Number is not power of two");
 		return binary;
 	}
 
-	static boolean isPowerOfTWo(int result) {
-		return result != 0 && ((result & (result - 1)) == 0);
-	}
-
-	private static double toDecimal(char[] array, double sum) {
+	/**
+	 * This method to convert binary to decimal
+	 * 
+	 * @param array
+	 * @param sum
+	 * @return
+	 */
+	public static double toDecimal(char[] array, double sum) {
 		int temp = 0;
 		String powerTwo = "";
 		// System.out.println("" +array.length);
@@ -872,4 +923,47 @@ public class Utility {
 		System.out.println(sum);
 		return sum;
 	}
+
+	/**
+	 * This method to check power of two
+	 * 
+	 * @param result
+	 * @return
+	 */
+	public static boolean isPowerOfTWo(int result) {
+		return result != 0 && ((result & (result - 1)) == 0);
+	}
+
+	public static void calenderDisplay(int month, int year) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * DATA STRUCTURE LOGICS
+	 */
+	
+	/**
+	 * @throws Exception
+	 */
+	public static String orderList() throws Exception {
+		
+		File file = new File("/home/bridgelabz/Documents/file2.txt");
+		BufferedReader buffer = new BufferedReader( new FileReader(file));
+		LinkedList<Integer> list = new LinkedList<Integer>();
+		String string;
+		String arr[]=null;
+		while((string=buffer.readLine())!=null)
+	    arr  = string.split(" ");
+		System.out.println("hii" +arr);
+		return string;
+	}
+
+	public static boolean isBalanced(String string) {
+		Stack<Character> stack=new Stack<Character>();
+		
+
+		return stack.isEmpty() ? true : false;
+	}
+
 }

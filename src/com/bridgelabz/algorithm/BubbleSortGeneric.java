@@ -9,37 +9,30 @@ nteger from standard input and prints them in sorted order,using bubble sort.
  ***********************************************/
 package com.bridgelabz.algorithm;
 
-import java.util.Scanner;
-
 import com.bridgelabz.util.Utility;
 
 public class BubbleSortGeneric {
 	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the size of list:");
-		int size = scanner.nextInt();
+		int size = Utility.getInteger();
 		Integer[] array = new Integer[size];
 		System.out.println("Enter the list of elements to be sorted:");
 		for (int i = 0; i < array.length; i++) {
-			array[i] = scanner.nextInt();
+			array[i] = Utility.getInteger();
 		}
 
 		Utility.bubbleSort(array);
 		Utility.printArray(array);
 
-		System.out.println("Enter the size of a string:");
-		int sizeString = scanner.nextInt();
-		String[] arrayString = new String[sizeString];
+		String[] arrayString = new String[size];
 		int length = array.length;
 		// System.out.println(length);
 		System.out.println("Enter the list of elements to be sorted:");
 		for (int i = 0; i < length; i++) {
-			arrayString[i] = scanner.next();
+			arrayString[i] = Utility.getString();
 		}
 		Utility.bubbleSort(arrayString);
 		Utility.printArray(arrayString);
-		scanner.close();
-
+	
 	}
 }

@@ -17,8 +17,11 @@ public class BinaryWord {
 		try {
 			String key;
 			String word = null;
+			// read file from particular location
 			File file = new File("/home/bridgelabz/Documents/file.txt");
+			//checks for existence
 			if (file.exists()) {
+				// check for read permisssion			
 				if (file.canRead()) {
 					BufferedReader bufferReader = new BufferedReader(new FileReader(file));
 					word = bufferReader.readLine();
@@ -43,6 +46,7 @@ public class BinaryWord {
 				System.out.println("File not found");
 			}
 		} catch (Exception e) {
+			//trace exception where actual problem occured
 			e.printStackTrace();
 		}
 

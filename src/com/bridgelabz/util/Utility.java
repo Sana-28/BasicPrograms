@@ -9,13 +9,16 @@
 package com.bridgelabz.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -23,20 +26,8 @@ import java.util.regex.Pattern;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
-import com.sun.javafx.fxml.expression.Expression;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
-/**
- * @author bridgelabz
- *
- */
-/**
- * @author bridgelabz
- *
- */
-/**
- * @author bridgelabz
- *
- */
 public class Utility {
 	static Scanner scanner = new Scanner(System.in);
 	static PrintWriter writer = new PrintWriter(System.out, true);
@@ -67,20 +58,23 @@ public class Utility {
 
 	public static String getString() {
 		return scanner.next();
+	}
 
+	public static String getWords() {
+		return scanner.nextLine();
 	}
 
 	/**
 	 * FUNCTIONAL LOGICS
 	 */
-	
+
 	/**
 	 * This method takes User Input and Replace String Template“Hello
 	 * <<UserName>>, How are you?”
 	 * 
 	 * @param input
 	 */
-	
+
 	public static void userName(String input) {
 		String REGEX = "<<UserName>>";
 		String INPUT = "Hello <<UserName>> , How are you?";
@@ -493,11 +487,10 @@ public class Utility {
 		return windchill;
 	}
 
-	
 	/**
-	 *AlGORITHM LOGICS
+	 * AlGORITHM LOGICS
 	 */
-	
+
 	/****
 	 * This method is to find the one string anagram of another
 	 * 
@@ -936,34 +929,274 @@ public class Utility {
 
 	public static void calenderDisplay(int month, int year) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	/**
 	 * DATA STRUCTURE LOGICS
 	 */
-	
+
 	/**
-	 * @throws Exception
+	 * This method reads the data from file and find a word in a file,if it is
+	 * found than added to file else removed from file.
 	 */
-	public static String orderList() throws Exception {
-		
-		File file = new File("/home/bridgelabz/Documents/file2.txt");
-		BufferedReader buffer = new BufferedReader( new FileReader(file));
-		LinkedList<Integer> list = new LinkedList<Integer>();
-		String string;
-		String arr[]=null;
-		while((string=buffer.readLine())!=null)
-	    arr  = string.split(" ");
-		System.out.println("hii" +arr);
-		return string;
+	public static void unOrderedList() {
+		try {
+			boolean key = false;
+			File file = new File("/home/bridgelabz/Documents/file1.txt");
+			BufferedReader buffer = new BufferedReader(new FileReader(file));
+
+			String words = buffer.readLine();
+
+			FileWriter fileWriter = new FileWriter("/home/bridgelabz/Documents/file1.txt");
+			String[] string = words.split(" ");
+			LinkedList<String> linkedlist = new LinkedList<String>();
+
+			for (int i = 0; i < string.length; i++) {
+				linkedlist.add(string[i]);
+			}
+
+			// System.out.println(linkedlist);
+			System.out.println(linkedlist.toString());
+			System.out.println("Enter the string to search :");
+			String find = Utility.getString();
+
+			for (int i = 0; i < linkedlist.size(); i++) {
+				if (linkedlist.get(i).equals(find)) {
+					linkedlist.remove(string[i]);
+					key = true;
+					break;
+				}
+			}
+			System.out.println(linkedlist.toString());
+			if (key == false) {
+
+				linkedlist.add(find);
+			}
+
+			if (key == true) {
+				for (int i = 0; i < linkedlist.size(); i++) {
+					String string2 = (String) (linkedlist.get(i)) + " ";
+					fileWriter.write(string2);
+					fileWriter.flush();
+				}
+			} else {
+				for (int i = 0; i < linkedlist.size(); i++) {
+					String string3 = (String) linkedlist.get(i) + " ";
+					fileWriter.write(string3);
+					fileWriter.flush();
+				}
+			}
+			System.out.println(linkedlist.toString());
+			buffer.close();
+			fileWriter.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public static boolean isBalanced(String string) {
-		Stack<Character> stack=new Stack<Character>();
-		
+	/**
+	 * This method to read from from the list of numbers
+	 * 
+	 * @param list
+	 */
+	public static <T> void readingDataFromFile(LinkedList<T> list) throws IOException {
+		try {
+			// read file from particular location
+			File file = new File("/home/bridgelabz/Documents/file2.txt");
+			try { 
+				// check weather file is present or not
+				if (file.exists()) { 
+					
+					// check for read permisssion			
+					if (file.canRead()) { 
+						// scans file contents
+						Scanner scanner = new Scanner(file);
+						while (scanner.hasNext()) {//checks for next token
+							Integer number = Utility.getInteger();
+							list.add((T) number); // add to linked list
+							list.sort(null);
+						}
+						System.out.println(list);
+					} else {
+						System.out.println("You can't read file");
+					}
+				} else {
+					System.out.println("File does not exits.");
+				}
+			} catch (Exception FileNotFoundException) {
+				System.out.println("File does not exits.");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception raised");
+		}
+		System.out.println();
+	}
 
-		return stack.isEmpty() ? true : false;
+	/**
+	 * This method search data from file
+	 * 
+	 * @param linkedlist
+	 * @param search
+	 */
+	public static <T> void searchFromFile(LinkedList<T> list, T search) throws IOException {
+
+		{
+			if (list.contains(search)) { //checks for the element present in the list
+				System.out.println("Integer found in the list and it is deleted from list.");
+				list.remove((Integer) search);
+				list.sort(null);
+				System.out.println(list);
+			} else {
+				System.out.println("Integer not found in the list and it is added to list.");
+				list.add(search);
+				list.sort(null);
+				System.out.println(list);
+			}
+		}
+	}
+
+	/**
+	 * This method writes the data back to the file
+	 * 
+	 * @param linkedlist
+	 */
+	public static <T> void writeDataToFile(LinkedList<Integer> list) throws IOException {
+		// TODO Auto-generated method stub
+		{
+			try {
+				// read file from particular location
+				File file = new File("/home/bridgelabz/Documents/file2.txt");
+				if (file.exists()) 
+					// checks weather file is present or not
+				{
+					//checks for write permission
+					if (file.canWrite()) 
+					{
+						// writes file contents on particular location
+						FileWriter fileWriter = new FileWriter(file);
+						// reads text from a character-input stream
+						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+						
+						String string = "";
+						for (int ele : list) {
+							string += ele + " ";
+						}
+						bufferedWriter.write(string);
+						bufferedWriter.flush();
+						bufferedWriter.close();
+					}
+
+					else {
+						System.out.println("You cant edit the file!!. Its does not have edit permission.");
+					}
+				} else {
+					System.out.println("File not exits.");
+					return;
+				}
+			} catch (Exception e) {
+				//trace exception where actual problem occured
+				System.out.println("Exception raised");
+			}
+		}
+
+	}
+
+	/**
+	 * This method push open parenthesis “(“ and pop closed parenthesis “) and
+	 * outputs true or False to Show Arithmetic Expression is balanced or not.
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public static boolean isValid(String string) {
+		int count = 0;
+		// initialize an empty stack 
+		Stack<Character> stack = new Stack<Character>();
+		for (int i = 0; i < string.length(); i++) {
+			//returns the specified index from 0 to n-1
+			if (string.charAt(i) == '(') {
+				//push an element to stack and and returns
+				//char value at specified location
+				stack.push(string.charAt(i));
+				count++;
+			}
+
+			if (string.charAt(i) == ')') {
+				//if nothing on stack decrease count else
+				//removes the top element
+				if (stack.isEmpty()) {
+					count--;
+				} else {
+					stack.pop();
+					count--;
+				}
+			}
+		}
+		
+		if (stack.isEmpty() && count == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * This method is to check palindrome
+	 * 
+	 * @param lowerString
+	 */
+	public static void palindromeChecker(String lowerString) {
+		//Initializing array Deque
+		ArrayDeque<Character> arrayDeque = new ArrayDeque<Character>();
+
+		for (int i = lowerString.length() - 1; i >= 0; i--) {
+			//add method to add elements
+			arrayDeque.add(lowerString.charAt(i)); 
+		}
+
+		String reverseString = "";
+
+		//writtens false if deque contains no elements
+		while (!arrayDeque.isEmpty()) {
+			reverseString = reverseString + arrayDeque.remove();
+		}
+		if (lowerString.equals(reverseString))
+			System.out.println("The input String is a palindrome.");
+		else
+			System.out.println("The input String is not a palindrome.");
+	}
+
+	/**
+	 * SIMULATE BANKING CASH COUNTER
+	 */
+	/**
+	 * This method is to add people in queue
+	 * @param numberOfPeople
+	 */
+	public static void addPeople(int numberOfPeople) {
+		int[] count=new int[numberOfPeople];
+		//Initialize a queue
+		
+		for (int i=0; i<count.length; i++)
+		{
+			GenericQueue<String> queue = new GenericQueue<String>();
+			System.out.print("Enter Nominee Name: ");
+			String name = Utility.getString();
+			queue.enqueue(name);
+			
+			System.out.print("Enter Account number: ");
+			int accountNumber=Utility.getInteger();
+			queue.enqueue(accountNumber);
+			
+		}
+		
+	}
+
+	public static void enqueue(int addAmount) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

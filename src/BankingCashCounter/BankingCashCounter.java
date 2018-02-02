@@ -10,22 +10,27 @@ public class BankingCashCounter {
 		int numberOfPeople=Utility.getInteger();
 		Utility.addPeople(numberOfPeople);
 		
-		System.out.println("Enter your choice: ");
-		int choice = Utility.getInteger();
+		int choice;
 		do
-		{
-			System.out.println("1. Add your account number"+"\n");
+		{// Add your account number
+
+			System.out.println("1. Deposit Cash"+"\n");
 			System.out.println("2. Check Balance"+"\n");
 			System.out.println("3. Withdraw Cash"+"\n");
-			System.out.println("4. Deposit Cash"+"\n");
-			System.out.println("5. Quit"+"\n");
+			System.out.println("4. Quit"+"\n");
+			
+			System.out.println("Enter your choice: ");
+			choice = Utility.getInteger();
 			
 			switch (choice)
 			{
 				case 1:
-					int addAmount=Utility.getInteger();
-					Utility.enqueue(addAmount);
+					System.out.println("Enter amount to deposit in your Account:");
+					int amount=Utility.getInteger();//Amount deposited
+					Utility.deposit(amount);
 				case 2:	
+					
+					//Utility.deposit();
 					
 				case 3:
 					

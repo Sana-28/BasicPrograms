@@ -28,7 +28,7 @@ import javax.swing.text.html.HTMLDocument.Iterator;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
-public class Utility {
+public class Utility<T> {
 	static Scanner scanner = new Scanner(System.in);
 	static PrintWriter writer = new PrintWriter(System.out, true);
 	public static String total;
@@ -111,13 +111,15 @@ public class Utility {
 	 * This method determine if it is a Leap Year.
 	 * 
 	 * @param year
+	 * @return 
 	 */
-	public static void leapYear(int year) {
+	public static int leapYear(int year) {
 		if (((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))) {
 			System.out.println("Year " + year + " is a Leap Year");
 		} else {
 			System.out.println("Year " + year + " is not a Leap Year");
 		}
+		return year;
 
 	}
 
@@ -793,7 +795,7 @@ public class Utility {
 	 * @return
 	 */
 	public static int dayOfWeek(int month, int date, int year) {
-		System.out.println("Entered date is : " + month + "/" + date + "/" + year);
+		//System.out.println("Entered date is : " + month + "/" + date + "/" + year);
 		int y0 = year - (14 - month) / 12;
 		int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
 		int m0 = month + 12 * ((14 - month) / 12) - 2;
@@ -925,11 +927,6 @@ public class Utility {
 	 */
 	public static boolean isPowerOfTWo(int result) {
 		return result != 0 && ((result & (result - 1)) == 0);
-	}
-
-	public static void calenderDisplay(int month, int year) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -1100,7 +1097,6 @@ public class Utility {
 				System.out.println("Exception raised");
 			}
 		}
-
 	}
 
 	/**
@@ -1178,25 +1174,33 @@ public class Utility {
 	public static void addPeople(int numberOfPeople) {
 		int[] count=new int[numberOfPeople];
 		//Initialize a queue
-		
+		GenericQueue<String> queue = new GenericQueue<String>();
 		for (int i=0; i<count.length; i++)
 		{
-			GenericQueue<String> queue = new GenericQueue<String>();
 			System.out.print("Enter Nominee Name: ");
 			String name = Utility.getString();
 			queue.enqueue(name);
 			
-			System.out.print("Enter Account number: ");
-			int accountNumber=Utility.getInteger();
-			queue.enqueue(accountNumber);
+			System.out.println("Enter your Account Number:");
+			int number=Utility.getInteger();
+			queue.enqueue(number);
 			
+			System.out.println("Enter your Account Balance:");
+			int balance=Utility.getInteger();
+			queue.enqueue(balance);
+			//deposit(balance);
 		}
-		
-	}
+		}
 
-	public static void enqueue(int addAmount) {
+
+	public static void deposit(int balance) {
 		// TODO Auto-generated method stub
-		
-	}
+		GenericQueue<String> queue = new GenericQueue<String>();
+		int deposit=Utility.getInteger();
+		queue.enqueue(deposit);
+		deposit+=balance;
+		queue.enqueue(deposit);
+	}	
 
-}
+
+	}

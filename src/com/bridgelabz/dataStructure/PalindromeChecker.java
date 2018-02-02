@@ -9,7 +9,6 @@ class PalindromeChecker {
         String inputString = Utility.getString();
         //System.out.println(inputString.toLowerCase());
         String lowerString=inputString.toLowerCase();
-       
         Utility.palindromeChecker(lowerString);
     }
 }

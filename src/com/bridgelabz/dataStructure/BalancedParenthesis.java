@@ -1,7 +1,13 @@
 package com.bridgelabz.dataStructure;
 
 import com.bridgelabz.util.Utility;
- public class BalancedParenthesis 
+
+ /**Purpose:This program is to check Arithmetic Expression is Balanced
+ * or not.
+ * @author Sana Shaikh
+ * @since 15/01/2018
+ */
+public class BalancedParenthesis 
 {
 	public static void main(String[] args) 
 	{

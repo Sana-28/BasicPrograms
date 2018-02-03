@@ -50,6 +50,7 @@ public class HashFunction {
 		int SlotNumber = number % 11;
 		map1.get(SlotNumber);// get a number
 
+		//Aftr search checks for a number 
 		LinkedList<Integer> numberList1 = map1.get(SlotNumber);
 		System.out.println(numberList1);
 		if (numberList1.contains(number)) {

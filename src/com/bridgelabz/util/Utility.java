@@ -16,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -111,7 +112,7 @@ public class Utility<T> {
 	 * This method determine if it is a Leap Year.
 	 * 
 	 * @param year
-	 * @return 
+	 * @return
 	 */
 	public static int leapYear(int year) {
 		if (((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)))) {
@@ -795,7 +796,8 @@ public class Utility<T> {
 	 * @return
 	 */
 	public static int dayOfWeek(int month, int date, int year) {
-		//System.out.println("Entered date is : " + month + "/" + date + "/" + year);
+		// System.out.println("Entered date is : " + month + "/" + date + "/" +
+		// year);
 		int y0 = year - (14 - month) / 12;
 		int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
 		int m0 = month + 12 * ((14 - month) / 12) - 2;
@@ -1002,15 +1004,15 @@ public class Utility<T> {
 		try {
 			// read file from particular location
 			File file = new File("/home/bridgelabz/Documents/file2.txt");
-			try { 
+			try {
 				// check weather file is present or not
-				if (file.exists()) { 
-					
-					// check for read permisssion			
-					if (file.canRead()) { 
+				if (file.exists()) {
+
+					// check for read permisssion
+					if (file.canRead()) {
 						// scans file contents
 						Scanner scanner = new Scanner(file);
-						while (scanner.hasNext()) {//checks for next token
+						while (scanner.hasNext()) {// checks for next token
 							Integer number = Utility.getInteger();
 							list.add((T) number); // add to linked list
 							list.sort(null);
@@ -1040,7 +1042,8 @@ public class Utility<T> {
 	public static <T> void searchFromFile(LinkedList<T> list, T search) throws IOException {
 
 		{
-			if (list.contains(search)) { //checks for the element present in the list
+			if (list.contains(search)) { // checks for the element present in
+											// the list
 				System.out.println("Integer found in the list and it is deleted from list.");
 				list.remove((Integer) search);
 				list.sort(null);
@@ -1065,17 +1068,16 @@ public class Utility<T> {
 			try {
 				// read file from particular location
 				File file = new File("/home/bridgelabz/Documents/file2.txt");
-				if (file.exists()) 
-					// checks weather file is present or not
+				if (file.exists())
+				// checks weather file is present or not
 				{
-					//checks for write permission
-					if (file.canWrite()) 
-					{
+					// checks for write permission
+					if (file.canWrite()) {
 						// writes file contents on particular location
 						FileWriter fileWriter = new FileWriter(file);
 						// reads text from a character-input stream
 						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-						
+
 						String string = "";
 						for (int ele : list) {
 							string += ele + " ";
@@ -1093,7 +1095,7 @@ public class Utility<T> {
 					return;
 				}
 			} catch (Exception e) {
-				//trace exception where actual problem occured
+				// trace exception where actual problem occured
 				System.out.println("Exception raised");
 			}
 		}
@@ -1108,20 +1110,20 @@ public class Utility<T> {
 	 */
 	public static boolean isValid(String string) {
 		int count = 0;
-		// initialize an empty stack 
+		// initialize an empty stack
 		Stack<Character> stack = new Stack<Character>();
 		for (int i = 0; i < string.length(); i++) {
-			//returns the specified index from 0 to n-1
+			// returns the specified index from 0 to n-1
 			if (string.charAt(i) == '(') {
-				//push an element to stack and and returns
-				//char value at specified location
+				// push an element to stack and and returns
+				// char value at specified location
 				stack.push(string.charAt(i));
 				count++;
 			}
 
 			if (string.charAt(i) == ')') {
-				//if nothing on stack decrease count else
-				//removes the top element
+				// if nothing on stack decrease count else
+				// removes the top element
 				if (stack.isEmpty()) {
 					count--;
 				} else {
@@ -1130,7 +1132,7 @@ public class Utility<T> {
 				}
 			}
 		}
-		
+
 		if (stack.isEmpty() && count == 0) {
 			return true;
 		} else {
@@ -1139,22 +1141,79 @@ public class Utility<T> {
 	}
 
 	/**
+	 * SIMULATE BANKING CASH COUNTER
+	 */
+	/**
+	 * This method is to add people in queue
+	 * 
+	 * @param numberOfPeople
+	 */
+	public static void getDetails() {
+
+		GenericQueue<String> queue = new GenericQueue<String>();
+		for (int i = 0; i < 3; i++) {
+			System.out.print("Enter Nominee Name: ");
+			String name = Utility.getString();
+			queue.enqueue(name);
+
+			System.out.println("Enter your Account Number:");
+			int number = Utility.getInteger();
+			queue.enqueue(number);
+		}
+	}
+
+	/**
+	 * This method is to deposit cash
+	 * 
+	 * @param cash
+	 */
+	public static void deposite(int cash) {
+
+		// Utility.getDetails();
+		System.out.println("Available balance:" + cash);
+		System.out.println("Enter amount to deposite");
+		int amount = Utility.getInteger();
+		cash = cash + amount;
+		System.out.println("Transaction sucessfull!!!");
+		System.out.println("Available balance: " + cash);
+	}
+
+	/**
+	 * This method is to withdraw amount from account
+	 * 
+	 * @param cash
+	 */
+	public static void withdraw(int cash) {
+
+		//Utility.getDetails();
+		System.out.println("Available balance:" + cash);
+		System.out.println("Enter amount to withdraw");
+		int amount = Utility.getInteger();
+		if (amount <= cash) {
+			cash = cash - amount;
+			System.out.println("Transaction sucessfull!!!");
+		} else
+			System.out.println("Balance is less !!! \n Cannot do transaction");
+		System.out.println("Available balance: " + cash);
+	}
+
+	/**
 	 * This method is to check palindrome
 	 * 
 	 * @param lowerString
 	 */
 	public static void palindromeChecker(String lowerString) {
-		//Initializing array Deque
+		// Initializing array Deque
 		ArrayDeque<Character> arrayDeque = new ArrayDeque<Character>();
 
 		for (int i = lowerString.length() - 1; i >= 0; i--) {
-			//add method to add elements
-			arrayDeque.add(lowerString.charAt(i)); 
+			// add method to add elements
+			arrayDeque.add(lowerString.charAt(i));
 		}
 
 		String reverseString = "";
 
-		//writtens false if deque contains no elements
+		// writtens false if deque contains no elements
 		while (!arrayDeque.isEmpty()) {
 			reverseString = reverseString + arrayDeque.remove();
 		}
@@ -1163,44 +1222,48 @@ public class Utility<T> {
 		else
 			System.out.println("The input String is not a palindrome.");
 	}
-
-	/**
-	 * SIMULATE BANKING CASH COUNTER
+	
+	/**This method to check prime number
+	 * @param num
+	 * @return
 	 */
-	/**
-	 * This method is to add people in queue
-	 * @param numberOfPeople
-	 */
-	public static void addPeople(int numberOfPeople) {
-		int[] count=new int[numberOfPeople];
-		//Initialize a queue
-		GenericQueue<String> queue = new GenericQueue<String>();
-		for (int i=0; i<count.length; i++)
-		{
-			System.out.print("Enter Nominee Name: ");
-			String name = Utility.getString();
-			queue.enqueue(name);
-			
-			System.out.println("Enter your Account Number:");
-			int number=Utility.getInteger();
-			queue.enqueue(number);
-			
-			System.out.println("Enter your Account Balance:");
-			int balance=Utility.getInteger();
-			queue.enqueue(balance);
-			//deposit(balance);
+	public static boolean isPrime(int num) {
+		for (int i = 2; i <= num / 2; i++) {
+			if (num % i == 0) {
+				return false;
+			}
 		}
-		}
-
-
-	public static void deposit(int balance) {
-		// TODO Auto-generated method stub
-		GenericQueue<String> queue = new GenericQueue<String>();
-		int deposit=Utility.getInteger();
-		queue.enqueue(deposit);
-		deposit+=balance;
-		queue.enqueue(deposit);
-	}	
-
-
+		return true;
 	}
+	
+	/**This method is to check anagram or not 
+	 * @param number1
+	 * @param number2
+	 * @return
+	 */
+	public static Boolean anagramChecker2(int number1, int number2) {
+		String numberToString1 = Integer.toString(number1);
+		String numberToString2 = Integer.toString(number2);
+		boolean status = true;
+
+		if (numberToString1.length() != numberToString2.length()) {
+			status = false;
+			// System.out.println("false");
+		} else {
+			char[] ArrayS1 = numberToString1.toCharArray();
+			char[] ArrayS2 = numberToString2.toCharArray();
+			Arrays.sort(ArrayS1);
+			Arrays.sort(ArrayS2);
+			status = Arrays.equals(ArrayS1, ArrayS2);
+		}
+		if (status) {
+			// System.out.println(number1 + " and " + number2 + " are
+			// anagrams");
+			return true;
+		} else {
+			// System.out.println(number1 + " and " + number2 + " are not
+			// anagrams");
+			return false;
+		}
+	}
+}

@@ -16,20 +16,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 public class Utility<T> {
+	private static FileWriter file;
+	private static FileReader fileReader;
+	// private static File file;
+	private static final String Regex = null;
 	static Scanner scanner = new Scanner(System.in);
 	static PrintWriter writer = new PrintWriter(System.out, true);
 	public static String total;
@@ -516,6 +520,7 @@ public class Utility<T> {
 
 			for (int i = 0; i < n1.length; i++) {
 
+				@SuppressWarnings("unused")
 				boolean isAnagram;
 				if (n1[i] == n2[i]) {
 					isAnagram = true;
@@ -601,7 +606,7 @@ public class Utility<T> {
 	 * 
 	 * @param array
 	 */
-	public static <T extends Comparable> T[] insertionSort(T[] array) {
+	public static <T extends Comparable<T>> T[] insertionSort(T[] array) {
 
 		int i, temporary;
 		for (i = 1; i < array.length; i++) {
@@ -623,7 +628,7 @@ public class Utility<T> {
 	 * @param array
 	 * @return
 	 */
-	public static <T extends Comparable> T[] bubbleSort(T[] array) {
+	public static <T extends Comparable<T>> T[] bubbleSort(T[] array) {
 		int i, j;
 		int length = array.length;
 		for (i = 0; i < length; i++) {
@@ -646,7 +651,7 @@ public class Utility<T> {
 	 * @param key
 	 * @return
 	 */
-	public static <T extends Comparable> int binarySearch(T[] array, T key, int left, int right) {
+	public static <T extends Comparable<T>> int binarySearch(T[] array, T key, int left, int right) {
 
 		if (left > right)
 			return 0;
@@ -975,13 +980,13 @@ public class Utility<T> {
 
 			if (key == true) {
 				for (int i = 0; i < linkedlist.size(); i++) {
-					String string2 = (String) (linkedlist.get(i)) + " ";
+					String string2 = (linkedlist.get(i)) + " ";
 					fileWriter.write(string2);
 					fileWriter.flush();
 				}
 			} else {
 				for (int i = 0; i < linkedlist.size(); i++) {
-					String string3 = (String) linkedlist.get(i) + " ";
+					String string3 = linkedlist.get(i) + " ";
 					fileWriter.write(string3);
 					fileWriter.flush();
 				}
@@ -1011,7 +1016,6 @@ public class Utility<T> {
 					// check for read permisssion
 					if (file.canRead()) {
 						// scans file contents
-						Scanner scanner = new Scanner(file);
 						while (scanner.hasNext()) {// checks for next token
 							Integer number = Utility.getInteger();
 							list.add((T) number); // add to linked list
@@ -1073,8 +1077,6 @@ public class Utility<T> {
 				{
 					// checks for write permission
 					if (file.canWrite()) {
-						// writes file contents on particular location
-						FileWriter fileWriter = new FileWriter(file);
 						// reads text from a character-input stream
 						BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
 
@@ -1185,7 +1187,7 @@ public class Utility<T> {
 	 */
 	public static void withdraw(int cash) {
 
-		//Utility.getDetails();
+		// Utility.getDetails();
 		System.out.println("Available balance:" + cash);
 		System.out.println("Enter amount to withdraw");
 		int amount = Utility.getInteger();
@@ -1222,8 +1224,32 @@ public class Utility<T> {
 		else
 			System.out.println("The input String is not a palindrome.");
 	}
-	
-	/**This method to check prime number
+
+	/**
+	 * This method is find number of binary trees generated using recursion.
+	 * 
+	 * @param node
+	 * @return
+	 */
+	public static int find(int node) {
+		{
+			int sum = 0;
+
+			if (node <= 1)
+				return 1;
+			else {
+				for (int i = 1; i <= node; i++) {
+					sum = (int) (sum + (find(i - 1) * find(node - i)));
+				}
+			}
+			return sum;
+
+		}
+	}
+
+	/**
+	 * This method to check prime number
+	 * 
 	 * @param num
 	 * @return
 	 */
@@ -1235,8 +1261,10 @@ public class Utility<T> {
 		}
 		return true;
 	}
-	
-	/**This method is to check anagram or not 
+
+	/**
+	 * This method is to check anagram or not
+	 * 
 	 * @param number1
 	 * @param number2
 	 * @return
@@ -1266,4 +1294,152 @@ public class Utility<T> {
 			return false;
 		}
 	}
-}
+
+	/**
+	 * OBJECT ORIENTED LOGICS
+	 */
+
+	/**
+	 * This method is to replace the regular expression
+	 * 
+	 * @param message
+	 * @param firstName
+	 * @param fullName
+	 * @param mobileNumber
+	 * @param date
+	 */
+	public static void regexExpression(String message, String firstName, String fullName, String mobileNumber,
+			String date) {
+		// TODO Auto-generated method stub
+		String replacefname = message.replace("<<name>>", firstName);
+		String replacefullname = replacefname.replace("<<full name>>", fullName);
+		String replacemobileNumber = replacefullname.replace("xxxxxxxxxx", mobileNumber);
+		String replacedate = replacemobileNumber.replace("01/01/2016", date);
+		System.out.println(replacedate);
+	}
+
+	/**
+	 * This method is to calculate total stock value
+	 */
+	public static void stockReport() {
+		// TODO Auto-generated method stub
+		JSONObject object = new JSONObject();
+
+		System.out.println("Enter number of stocks:");
+		int numberOfStock = Utility.getInteger();
+		// object.put("Number Of Stocks", numberOfStock);
+
+		JSONArray stockArray = new JSONArray();
+		for (int i = 0; i < numberOfStock; i++) {
+			JSONObject object1 = new JSONObject();
+
+			System.out.println("\n" + "Enter Name of Company:");
+			String shareName = Utility.getString();
+			object1.put("Share Name:", shareName);
+
+			System.out.println("Enter the Price of shares:");
+			int sharePrice = Utility.getInteger();
+			object1.put("Share Price:", sharePrice);
+
+			System.out.println("Enter Number of shares:");
+			int numberOfShares = Utility.getInteger();
+			object1.put("Number Of Shares:", numberOfShares);
+
+			int totalValue = sharePrice * numberOfShares;
+			object1.put("Total Value of stock:", totalValue);
+
+			stockArray.add(object1);
+
+			System.out.println("\n" + "*****Stock Report*****" + "\n");
+			System.out.println("Company Name       : " + shareName);
+			System.out.println("Share Price        : " + sharePrice);
+			System.out.println("Number of Shares   : " + numberOfShares);
+			System.out.println("Total Cost of Share: " + (totalValue));
+		}
+		object.put("Stock Details:", stockArray);
+		// System.out.println("\n" +"Total value of Stock.." +
+		// object.add(totalValue));
+
+		try {
+			file = new FileWriter(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/objectOriented/stock.json");
+			file.write(object.toString());
+
+			file.flush();
+			System.out.println("\n" + "Successfully Copied JSON Object to File..");
+			System.out.println("\nJSON Object: " + object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * This method is to create a user.
+	 * 
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws Throwable 
+	 */
+
+	public static void createUser() throws IOException, ParseException, Throwable {
+		
+		//file Location
+		File file = new File(
+				"/home/bridgelabz/SANAworkspace/BasicProgram/src/" 
+				+ "com/bridgelabz/objectOriented/userDetails.json");
+		//System.out.println("hii" +file);
+		
+		//check for its existence
+		if (file.exists()) {
+			
+			JSONObject jsonobject1 = new JSONObject();
+
+			boolean check = true;
+			
+			while (check == true) {
+					//file Reader reads 'file'
+					FileReader fileReader = new FileReader(file);
+					
+					//create a JSON parser 
+					JSONParser parser = new JSONParser();
+					
+					//create JSon object 
+					Object jsonObject1=parser.parse(fileReader);
+					
+					//initialize a JSon array
+					JSONArray userArray = new JSONArray();
+					
+					//create an jsonObject to store values
+					JSONObject jsonobject = jsonobject1;
+					
+					System.out.println("\n"+"Enter Name:");
+					String name = Utility.getString();
+					jsonobject.put("Name", name);
+					
+					System.out.println("Enter Balance:");
+					int balance = Utility.getInteger();
+					jsonobject.put("Balance", balance);
+					
+					System.out.println("Enter how many shares you want to purchase:");
+					String count = Utility.getString();
+
+					jsonobject.put("ShareCount", count);
+
+					userArray.add(jsonobject);
+					try {
+						FileWriter fileWriter = new FileWriter("/home/bridgelabz/SANAworkspace/"
+								+ "BasicProgram/src/com/bridgelabz/objectOriented/"
+								+ "userDetails.json");
+						fileWriter.write(jsonobject1.toString());
+						fileWriter.flush();
+						System.out.println("\n" + "Successfully Copied JSON Object to File..");
+						System.out.println("\nJSON Object: " + jsonobject1);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} 
+			}
+
+		} 
+	}

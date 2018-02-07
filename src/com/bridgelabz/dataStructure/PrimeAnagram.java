@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.bridgelabz.util.Utility;
 
+/**Purpose: This program is to find Prime Number and store only 
+ * the numbers in that range that are Anagrams.
+ * @author Sana Shaikh
+ * @since 15/01/2018
+ */
 public class PrimeAnagram{
 	public static void main(String[] args) {
 		//Initialize a arraylist

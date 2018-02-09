@@ -16,11 +16,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.regex.Matcher;
@@ -28,8 +31,11 @@ import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 
+import com.bridgelabz.objectOriented.StackCommercial;
+import com.sun.javafx.scene.paint.GradientUtils.Parser;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 public class Utility<T> {
@@ -1077,7 +1083,7 @@ public class Utility<T> {
 				// read file from particular location
 				File file = new File("/home/bridgelabz/Documents/file2.txt");
 				if (file.exists())
-					// checks weather file is present or not
+				// checks weather file is present or not
 				{
 					// checks for write permission
 					if (file.canWrite()) {
@@ -1415,7 +1421,7 @@ public class Utility<T> {
 
 		fileWriter = new FileWriter(file);
 		// writing back JSon file to JSonArray
-		fileWriter.write(jsonArray.toJSONString());
+		fileWriter.write(JSONValue.toJSONString(jsonArray));
 		fileWriter.flush();
 		fileWriter.close();
 	}
@@ -1473,11 +1479,16 @@ public class Utility<T> {
 		}
 	}
 
+	/**
+	 * This method is to buy share
+	 * 
+	 * @throws IOException
+	 * @throws org.json.simple.parser.ParseException
+	 */
 	public static void buyShare() throws IOException, org.json.simple.parser.ParseException {
 		// TODO Auto-generated method stub
 		File file1 = new File(
-				"/home/bridgelabz/SANAworkspace/BasicProgram/src/" +
-				"com/bridgelabz/objectOriented/userDetails.json");
+				"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/objectOriented/userDetails.json");
 
 		File file2 = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
 				+ "com/bridgelabz/objectOriented/companyShares.json");
@@ -1497,10 +1508,10 @@ public class Utility<T> {
 			JSONArray shares = (JSONArray) parser1.parse(fileReader);
 			// System.out.println("" +shares);
 
-			//for userDeatils.json
+			// for userDeatils.json
 			Iterator<?> iterator = userDetails.iterator();
 
-			//for companyShares.json
+			// for companyShares.json
 			Iterator<?> iterator1 = shares.iterator();
 
 			System.out.println("Enter your name Existing User:");
@@ -1509,54 +1520,61 @@ public class Utility<T> {
 			// check in user details for next
 			while (iterator.hasNext()) {
 
-				//JSON object for userDeatils 
+				// JSON object for userDeatils
 				JSONObject object = (JSONObject) iterator.next();
 
 				if (object.get("userName").equals(name)) {
-					//System.out.println(""+object.get("userName"));
+					// System.out.println(""+object.get("userName"));
 
 					System.out.println("Enter your share symbol you want to buy:[@,#,$,!]");
 					String symbol = Utility.getString();
 					object.put("ShareSymbol", symbol);
 
-					//Check in company Shares share symbol
+					Stack stack = new Stack();
+					stack.push(symbol);
+					// System.out.println("Stack symbol" +stack);
+
+					// Check in company Shares share symbol
 					while (iterator1.hasNext()) {
 
-						//created object1 for Company Shares
+						// created object1 for Company Shares
 						JSONObject object1 = (JSONObject) iterator1.next();
 
 						if (object1.get("ShareSymbol").equals(symbol)) {
-							System.out.println(""+object.get("ShareSymbol"));
+							// System.out.println(""+object.get("ShareSymbol"));
 
 							System.out.println("Enter number of shares you want to buy:");
-							int buy=Utility.getInteger();
+							int buy = Utility.getInteger();
 
-							/*System.out.println("Enter the amount");
-							int amount = Utility.getInteger();*/
-							//get balance from user
+							// get balance from user
 							int balance = Integer.parseInt(object.get("balance").toString());
-							System.out.println("userbalance"+" "+balance);
+							// System.out.println("userbalance"+" "+balance);
 
-							//get price from company share
-							int price=Integer.parseInt(object1.get("price").toString());
-							System.out.println("company shareprice"+" "+price);
+							// get price from company share
+							int price = Integer.parseInt(object1.get("price").toString());
+							// System.out.println("company shareprice"+"
+							// "+price);
 
-							//get number of share user have
+							// get number of share user have
 							int numberOfShare = Integer.parseInt(object.get("numberOfShare").toString());
-							System.out.println("number of share user have"+" "+numberOfShare);
+							// System.out.println("number of share user have"+"
+							// "+numberOfShare);
 
-							//get share count company have
-							int shareCount=Integer.parseInt(object1.get("shareCount").toString());
-							System.out.println("shareCountcompany"+" "+shareCount+"\n");
+							// get share count company have
+							int shareCount = Integer.parseInt(object1.get("shareCount").toString());
+							// System.out.println("shareCountcompany"+"
+							// "+shareCount+"\n");
 
-							int newBalance=balance-(price*buy);
-							System.out.println("newBalance"+" "+newBalance);
+							int newBalance = balance - (price * buy);
+							// System.out.println("newBalance"+" "+newBalance);
 
-							int updateNumberOfShare=numberOfShare+buy;
-							System.out.println("updateNumberOfShare"+" "+updateNumberOfShare);
+							int updateNumberOfShare = numberOfShare + buy;
+							// System.out.println("updateNumberOfShare"+"
+							// "+updateNumberOfShare);
 
-							int shareCountCompany=shareCount-buy;
-							System.out.println("shareCountCompany"+" "+shareCountCompany);
+							int shareCountCompany = shareCount - buy;
+							// System.out.println("shareCountCompany"+"
+							// "+shareCountCompany);
 
 							object.remove("balance");
 							object.remove("numberOfShare");
@@ -1566,23 +1584,266 @@ public class Utility<T> {
 							object.put("numberOfShare", updateNumberOfShare);
 							object1.put("shareCount", shareCountCompany);
 
+							LinkedList<String> queue = new LinkedList<String>();
+							Date date = new Date();
+							String currentDateTime = new SimpleDateFormat("E dd/MM/yyyy. 'at' hh:mm:ss a").format(date);
+							queue.add(currentDateTime);
+							System.out.println("Date and Time of Share Purchase:" + " " + currentDateTime + "\n");
 
-							fileWriter = new FileWriter(file1);
-							// writing back JSon file to JSonArray
-							fileWriter.write(userDetails.toJSONString());
-							fileWriter.flush();
-							fileWriter.close();
-							
-							fileWriter = new FileWriter(file2);
-							// writing back JSon file to JSonArray
-							fileWriter.write(shares.toJSONString());
-							fileWriter.flush();
-							fileWriter.close();
-							
 						}
+
+						fileWriter = new FileWriter(file1);
+						// writing back JSon file to JSonArray
+						fileWriter.write(JSONValue.toJSONString(userDetails));
+						fileWriter.flush();
+						fileWriter.close();
 					}
+					fileWriter = new FileWriter(file2);
+					// writing back JSon file to JSonArray
+					fileWriter.write(JSONValue.toJSONString(shares));
+					fileWriter.flush();
+					fileWriter.close();
 				}
 			}
 		}
 	}
-}
+
+	/**
+	 * This method is to sell a share
+	 * 
+	 * @throws Throwable
+	 */
+	public static void sellShare() throws Throwable {
+		File file1 = new File(
+				"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/objectOriented/userDetails.json");
+
+		File file2 = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
+				+ "com/bridgelabz/objectOriented/companyShares.json");
+
+		// check for the existence of the file
+		if (file1.exists() && file2.exists()) {
+
+			// Reading userDetails file
+			fileReader = new FileReader(file1);
+			JSONParser parser = new JSONParser();
+			JSONArray userDetails = (JSONArray) parser.parse(fileReader);
+			// System.out.println(""+userDetails);
+
+			// Reading shares file
+			fileReader = new FileReader(file2);
+			JSONParser parser1 = new JSONParser();
+			JSONArray shares = (JSONArray) parser1.parse(fileReader);
+			// System.out.println("" +shares);
+
+			// for userDeatils.json
+			Iterator<?> iterator = userDetails.iterator();
+
+			// for companyShares.json
+			Iterator<?> iterator1 = shares.iterator();
+
+			System.out.println("Enter your name Existing User:");
+			String name = Utility.getString();
+
+			// check in user details for next
+			while (iterator.hasNext()) {
+
+				// JSON object for userDeatils
+				JSONObject object = (JSONObject) iterator.next();
+
+				if (object.get("userName").equals(name)) {
+					// System.out.println(""+object.get("userName"));
+
+					System.out.println("Enter your share symbol you want to sell:[@,#,$,!]");
+					String symbol = Utility.getString();
+					object.put("ShareSymbol", symbol);
+
+					Stack stack = new Stack();
+					stack.push(symbol);
+
+					// Check in company Shares share symbol
+					while (iterator1.hasNext()) {
+
+						// created object1 for Company Shares
+						JSONObject object1 = (JSONObject) iterator1.next();
+
+						if (object.get("ShareSymbol").equals(symbol)) {
+							// System.out.println(""+object.get("ShareSymbol"));
+
+							System.out.println("Enter number of shares you want to sell:");
+							int sell = Utility.getInteger();
+
+							// get balance from user
+							int balance = Integer.parseInt(object.get("balance").toString());
+							// System.out.println("Balance of User"+"
+							// "+balance);
+
+							// get number of share user have
+							int numberOfShare = Integer.parseInt(object.get("numberOfShare").toString());
+							// System.out.println("Number of share user have"+"
+							// "+numberOfShare);
+
+							// get price of share
+							int price = Integer.parseInt(object1.get("price").toString());
+							// System.out.println("Price per Share"+" "+price);
+
+							// get share count company have
+							int shareCount = Integer.parseInt(object1.get("shareCount").toString());
+							// System.out.println("ShareCount of the company"+"
+							// "+shareCount+"\n");
+
+							int newBalance = balance + (price * sell);
+							// System.out.println("NewBalance of user"+"
+							// "+newBalance);
+
+							int updateNumberOfShare = numberOfShare - sell;
+							// System.out.println("updateNumberOfShare"+"
+							// "+updateNumberOfShare);
+
+							int shareCountCompany = shareCount + sell;
+							// System.out.println("shareCountCompany"+"
+							// "+shareCountCompany);
+
+							object.remove("balance");
+							object.remove("numberOfShare");
+							object1.remove("shareCount");
+
+							object.put("balance", newBalance);
+							object.put("numberOfShare", updateNumberOfShare);
+							object1.put("shareCount", shareCountCompany);
+
+							LinkedList<String> queue = new LinkedList<String>();
+							Date date = new Date();
+							String currentDateTime = new SimpleDateFormat("E dd/MM/yyyy. 'at' hh:mm:ss a").format(date);
+							queue.add(currentDateTime);
+							System.out.println("Date and Time of Share sold:" + " " + currentDateTime + "\n");
+
+						}
+
+						fileWriter = new FileWriter(file1);
+						// writing back JSon file to JSonArray
+						fileWriter.write(JSONValue.toJSONString(userDetails));
+						fileWriter.flush();
+						fileWriter.close();
+					}
+					fileWriter = new FileWriter(file2);
+					// writing back JSon file to JSonArray
+					fileWriter.write(JSONValue.toJSONString(shares));
+					fileWriter.flush();
+					fileWriter.close();
+				}
+			}
+		}
+	}
+
+	/**
+	 * This method is to display stock report
+	 * 
+	 * @throws IOException
+	 * @throws org.json.simple.parser.ParseException
+	 */
+	public static <T> void displayReport() throws IOException, org.json.simple.parser.ParseException {
+		File file1 = new File(
+				"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/objectOriented/userDetails.json");
+
+		fileReader = new FileReader(file1);
+		JSONParser parser = new JSONParser();
+		JSONArray userDetails = (JSONArray) parser.parse(fileReader);
+
+		Iterator<T> iterator = userDetails.iterator();
+		System.out.println("\n" + "All user Detail Report:");
+		while (iterator.hasNext()) {
+			JSONObject object = (JSONObject) iterator.next();
+			System.out.println(object);
+		}
+	}
+
+	/**
+	 * This method initialize deck of cards,Shuffle the cards using Random
+	 * method and then distribute 9 Cards to 4 Players and Print the Cards the
+	 * received by the 4 Players
+	 * 
+	 * @param suits
+	 * @param ranks
+	 */
+	public static void deckOfCards(String[] suits, String[] ranks) {
+		String array[][] = new String[4][9];
+		
+		// initialize deck
+		int numberOfCards = suits.length * ranks.length;
+		String[] deck = new String[numberOfCards];
+
+		// initialize deck
+		for (int i = 0; i < ranks.length; i++) {
+			for (int j = 0; j < suits.length; j++) {
+				deck[suits.length * i + j] = ranks[i] + "->" + suits[j];
+				// System.out.print(""+(deck[suits.length*i + j]));
+			}
+		}
+
+		// shuffle cards
+		for (int i = 0; i < numberOfCards; i++) {
+			int random = i + (int) (Math.random() * (numberOfCards - i));
+			String temp = deck[random];
+			deck[random] = deck[i];
+			deck[i] = temp;
+		}
+
+		// distribute 9 cards to 4 player
+		for (int i = 0; i < 4; i++) {
+			System.out.print("Player" + (i + 1) + "\n");
+			for (int j = 0; j < 9; j++) {
+				array[i][j] = (deck[i + j * 4]);
+				System.out.println(" " + array[i][j]);
+			}
+			System.out.println("\n");
+		}
+	}
+
+	/**This method is to print deck of card using queue
+	 * @param suits
+	 * @param ranks
+	 */
+	public static void deckOfCardsQueue(String[] suits, String[] ranks) {
+		
+		String array[][] = new String[4][9];
+
+		// initialize deck
+		int numberOfCards = suits.length * ranks.length;
+		String[] deck = new String[numberOfCards];
+
+		// initialize deck
+		for (int i = 0; i < ranks.length; i++) {
+			for (int j = 0; j < suits.length; j++) {
+				deck[suits.length * i + j] = ranks[i] + "->" + suits[j];
+				// System.out.print(""+(deck[suits.length*i + j]));
+			}
+		}
+
+		// shuffle cards
+		for (int i = 0; i < numberOfCards; i++) {
+			int random = i + (int) (Math.random() * (numberOfCards - i));
+			String temp = deck[random];
+			deck[random] = deck[i];
+			deck[i] = temp;
+		}
+
+		Queue queue=(Queue) new QueueDeck();
+		// distribute 9 cards to 4 player
+		for (int i = 0; i < 4; i++) {
+			System.out.print("Player" + (i + 1) + "\n");
+			for (int j = 0; j < 9; j++) {
+				array[i][j] = (deck[i + j * 4]);
+				//System.out.println(" " + array[i][j]);
+				queue.add(array[i][j]);
+				System.out.println(""+queue);
+			}
+			System.out.println("\n");
+	}
+	}
+
+	public static void addNewPerson() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}// End of utility

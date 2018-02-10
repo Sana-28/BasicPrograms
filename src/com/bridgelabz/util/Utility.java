@@ -18,11 +18,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
@@ -1009,6 +1012,69 @@ public class Utility<T> {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This method reads the data from file and find a Integer in a file,if it is
+	 * found than added to file else removed from file.
+	 */
+	public static void orderedList() {
+		try {
+			boolean key = false;
+			File file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
+					+ "com/bridgelabz/dataStructure/file2.txt");
+			BufferedReader buffer = new BufferedReader(new FileReader(file));
+
+			String words = buffer.readLine();
+
+			FileWriter fileWriter = new FileWriter("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
+					+ "com/bridgelabz/dataStructure/file2.txt");
+			String[] string = words.split(" ");
+			LinkedList<String> linkedlist = new LinkedList<String>();
+
+			for (int i = 0; i < string.length; i++) {
+				linkedlist.add(string[i]);
+			}
+
+			// System.out.println(linkedlist);
+			System.out.println(linkedlist.toString());
+			System.out.println("Enter the string to search :");
+			String find = Utility.getString();
+
+			for (int i = 0; i < linkedlist.size(); i++) {
+				if (linkedlist.get(i).equals(find)) {
+					linkedlist.remove(string[i]);
+					key = true;
+					break;
+				}
+			}
+			System.out.println(linkedlist.toString());
+			if (key == false) {
+
+				linkedlist.add(find);
+			}
+
+			if (key == true) {
+				for (int i = 0; i < linkedlist.size(); i++) {
+					String string2 = (linkedlist.get(i)) + " ";
+					fileWriter.write(string2);
+					fileWriter.flush();
+				}
+			} else {
+				for (int i = 0; i < linkedlist.size(); i++) {
+					String string3 = linkedlist.get(i) + " ";
+					fileWriter.write(string3);
+					fileWriter.flush();
+				}
+			}
+			System.out.println(linkedlist.toString());
+			buffer.close();
+			fileWriter.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	/**
 	 * This method to read from from the list of numbers
@@ -1018,7 +1084,8 @@ public class Utility<T> {
 	public static <T> void readingDataFromFile(LinkedList<T> list) throws IOException {
 		try {
 			// read file from particular location
-			File file = new File("/home/bridgelabz/Documents/file2.txt");
+			file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
+					+ "com/bridgelabz/dataStructure/file2.txt");
 			try {
 				// check weather file is present or not
 				if (file.exists()) {
@@ -1767,7 +1834,7 @@ public class Utility<T> {
 	 */
 	public static void deckOfCards(String[] suits, String[] ranks) {
 		String array[][] = new String[4][9];
-		
+
 		// initialize deck
 		int numberOfCards = suits.length * ranks.length;
 		String[] deck = new String[numberOfCards];
@@ -1799,12 +1866,14 @@ public class Utility<T> {
 		}
 	}
 
-	/**This method is to print deck of card using queue
+	/**
+	 * This method is to print deck of card using queue
+	 * 
 	 * @param suits
 	 * @param ranks
 	 */
 	public static void deckOfCardsQueue(String[] suits, String[] ranks) {
-		
+
 		String array[][] = new String[4][9];
 
 		// initialize deck
@@ -1827,23 +1896,279 @@ public class Utility<T> {
 			deck[i] = temp;
 		}
 
-		Queue queue=(Queue) new QueueDeck();
+		QueueDeck queueDeck = new QueueDeck();
 		// distribute 9 cards to 4 player
 		for (int i = 0; i < 4; i++) {
 			System.out.print("Player" + (i + 1) + "\n");
 			for (int j = 0; j < 9; j++) {
 				array[i][j] = (deck[i + j * 4]);
-				//System.out.println(" " + array[i][j]);
-				queue.add(array[i][j]);
-				System.out.println(""+queue);
+				// System.out.println(" " + array[i][j]);
+				queueDeck.push(array[i][j]);
+				//System.out.println("" + queue);
 			}
 			System.out.println("\n");
-	}
+		}
 	}
 
+	/**
+	 * This method is to add a New person to the address book
+	 */
 	public static void addNewPerson() {
-		// TODO Auto-generated method stub
+		try {
+			file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src"
+						+"/com/bridgelabz/objectOriented/addressBook.json");
+			if (file.exists()) {
+
+				if (file.canRead() && file.canWrite()) {
+					fileReader = new FileReader(file);
+					JSONParser parser = new JSONParser();
+					JSONArray array = (JSONArray) parser.parse(fileReader);
+					
+					JSONObject json = new JSONObject();
+					
+					System.out.println("Enter First Name:");
+					String firstname = Utility.getString();
+					// System.out.println("firstname"+firstname);
+
+					System.out.println("Enter Last Name:");
+					String lastname = Utility.getString();
+					// System.out.println("lastname"+lastname);
+
+					System.out.println("Enter Address:");
+					String address = Utility.getString();
+					// System.out.println("address"+address);
+
+					System.out.println("Enter City:");
+					String city = Utility.getString();
+					// System.out.println("city"+city);
+
+					System.out.println("Enter State:");
+					String state = Utility.getString();
+					// System.out.println("state"+state);
+
+					System.out.println("Enter ZIP Code:");
+					String zip = Utility.getString();
+					// System.out.println("zip"+zip);
+
+					System.out.println("Enter Mobile Number:");
+					String mobile = Utility.getString();
+					// System.out.println("mobile"+mobile);
+
+					Map<String,String> map =new HashMap<>();
+					
+					json.put("Firstname", firstname);
+					json.put("Lastname", lastname);
+					json.put("Address", address);
+					json.put("City", city);
+					json.put("State", state);
+					json.put("Zip", zip);
+					json.put("Mobile", mobile);
+					
+					array.add( json );
+					
+					System.out.println("Your details added Successfully." + "\n");
+					fileWriter = new FileWriter(file);
+					fileWriter.write(JSONArray.toJSONString(array));
+					fileWriter.flush();
+					fileWriter.close();
+				}
+
+				else {
+					System.out.println("Cannot read and write to file");
+				}
+			} else {
+				System.out.println("File not exits..");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This method is to edit details of person in Address Book
+	 */
+	public static void editInformation() {
+		{
+			try {
+				file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src"
+						+ "/com/bridgelabz/objectOriented/addressBook.json");
+				if (file.exists()) {
+					if (file.canRead() && file.canWrite()) {
+						fileReader = new FileReader(file);
+						JSONParser parser = new JSONParser();
+						JSONArray array = (JSONArray) parser.parse(fileReader);
+
+						Iterator<?> iterator = array.iterator();
+						System.out.println("Enter the NAme of person you want to edit details:");
+						String name = Utility.getString();
+						boolean check = false;
+						while (iterator.hasNext()) {
+							JSONObject object = (JSONObject) iterator.next();
+							if (object.get("Firstname").equals(name)) {
+								System.out.println("What you want to edit in Address Book?"
+											+ "\n" + "Lastname" + "\n"+ "Address" + "\n" +
+											"City" + "\n" + "State" + "\n" + "Zip" + "\n");
+								String edit = Utility.getString();
+								System.out.println("Enter the new " + edit + " to update.");
+
+								String update = Utility.getString();
+								object.remove(edit);
+								object.put(edit, update);
+								System.out.println("Edited Information Successfully.");
+								check = true;
+								break;
+							}
+						}
+						if (check == false) {
+							System.out.println("Person not found in Address Book" + "\n");
+						}
+						fileWriter = new FileWriter(file);
+						fileWriter.write(JSONArray.toJSONString(array));
+						fileWriter.flush();
+						fileWriter.close();
+					} else {
+						System.out.println("Cannot edit a File");
+					}
+				} else {
+					System.out.println("File not exist..");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * This method is to Delete person from addressBook
+	 */
+	public static void deletePerson() {
+		{
+			try {
+				file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src"
+						+ "/com/bridgelabz/objectOriented/addressBook.json");
+				if (file.exists()) {
+					if (file.canRead()) {
+						fileReader = new FileReader(file);
+						JSONParser parser = new JSONParser();
+						JSONArray array = (JSONArray) parser.parse(fileReader);
+
+						System.out.println("Enter the user");
+						String name = Utility.getString();
+
+						Iterator<?> iterator = array.iterator();
+						boolean check = false;
+						while (iterator.hasNext()) {
+							JSONObject jsonObject = (JSONObject) iterator.next();
+
+							if (jsonObject.get("Firstname").equals(name)) {
+								array.remove(jsonObject);
+								System.out.println("Deleted Successfully." + "\n");
+								check = true;
+								break;
+							}
+						}
+						if (check == false) {
+							System.out.println("Person do not exist in Address Book." + "\n");
+						}
+						if (file.canWrite()) {
+							fileWriter = new FileWriter(file);
+							fileWriter.write(JSONArray.toJSONString(array));
+							fileWriter.flush();
+							fileWriter.close();
+						} else {
+							System.out.println("Do not read/write permission");
+						}
+					}
+				} else {
+					System.out.println("File not exits..");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * This method is to print the Address Book
+	 */
+	public static void printAddressBook() {
+		{
+			try {
+				file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src"
+						+ "/com/bridgelabz/objectOriented/addressBook.json");
+				if (file.exists()) {
+					if (file.canRead() && file.canWrite()) {
+						fileReader = new FileReader(file);
+						JSONParser parser = new JSONParser();
+						JSONArray array = (JSONArray) parser.parse(fileReader);
+						Iterator iterator = array.iterator();
+						System.out.println("\n" + "****Address Book****");
+
+						while (iterator.hasNext()) {
+							JSONObject obj = (JSONObject) iterator.next();
+							System.out.println("\n" + "***Person Details***");
+							System.out.println("First Name : " + obj.get("Firstname"));
+							System.out.println("Last Name  : " + obj.get("Lastname"));
+							System.out.println("Address    : " + obj.get("Address"));
+							System.out.println("City       : " + obj.get("City"));
+							System.out.println("State      : " + obj.get("State"));
+							System.out.println("Zip        : " + obj.get("Zip"));
+							System.out.println("Mobile     : " + obj.get("Mobile"));
+						}
+					} else {
+						System.out.println("Cannot have read permission" + "\n");
+					}
+				} else {
+					System.out.println("Filenot exist.." + "\n");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void addShare() {
+		Map list = (Map) new LinkedList<String>();
+
+		try
+		{
+			file=new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/com/"
+					+ "bridgelabz/objectOriented/linkedShares.json");
+			if(file.exists())
+				if (file.canRead() && file.canWrite()) {
+					fileReader = new FileReader(file);
+					JSONParser parser = new JSONParser();
+					JSONArray array= (JSONArray) parser.parse(fileReader);
+					Iterator iterator = ((List) array).iterator();
+					
+					while (iterator.hasNext()) {
+					JSONObject json=(JSONObject) iterator.next();
+					System.out.println("Enter your share you want to add:");
+					String share = Utility.getString();
+					((ArrayList) list).add(share);
+					json.putAll(list);
+					array.add(json);
+					}
+					fileWriter = new FileWriter(file);
+					fileWriter.write(JSONArray.toJSONString(array));
+					fileWriter.flush();
+					fileWriter.close();	
+		}
+	}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void addPatient() {
+
+//		try{
+//			file=new File("/home/bridgelabz/SANAworkspace/BasicProgram/"
+//					+ "src/com/bridgelabz/objectOriented/patient.json");
+//		}
 		
 	}
-
 }// End of utility

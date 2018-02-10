@@ -1,6 +1,8 @@
 package com.bridgelabz.algorithm;
 
 import java.util.Arrays;
+import java.util.Scanner;
+
 import com.bridgelabz.util.Utility;
 
 /**Purpose :This program binary search for the key element  
@@ -10,7 +12,14 @@ import com.bridgelabz.util.Utility;
  */
 public class BinarySearch {
 
+	private static Scanner scanner;
+	
 	public static void main(String[] args) {
+		scanner = new Scanner(System.in);
+		System.out.println("Press 1 to Start the time:");
+		scanner.nextLong();
+		long startTime = System.currentTimeMillis();
+		System.out.println("Start time.." + startTime );
 	
 		System.out.println("Enter the size of list:");
 		int size =Utility.getInteger();
@@ -47,6 +56,15 @@ public class BinarySearch {
 			System.out.println("Element Found..");
 		else 
 			System.out.println("Element not Found..");
-	
+		
+		System.out.println("Press 2 to stop the time:");
+		scanner.nextLong();
+		long stopTime = System.currentTimeMillis();
+		System.out.println("Stop Time." +  stopTime );
+
+		long elapsedTime = stopTime - startTime;
+		// System.out.println("Elapsed time between start and stop.."
+		// +elapsedTime);
+		System.out.println("Elapsed time: " + (elapsedTime / 1000) % 60 + "sec");
 	}
 }

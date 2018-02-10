@@ -1,10 +1,21 @@
 package com.bridgelabz.algorithm;
 
+import java.util.Scanner;
+
 import com.bridgelabz.util.Utility;
 
 public class InsertionSortGeneric {
+
+	private static Scanner scanner;
+
 	public static void main(String[] args) {
 	
+		scanner = new Scanner(System.in);
+		System.out.println("Press 1 to Start the time:");
+		scanner.nextLong();
+		long startTime = System.currentTimeMillis();
+		System.out.println("Start time.." + startTime );
+		
 		System.out.println("Enter the size of list:");
 		int size = Utility.getInteger();
 		Integer[] array = new Integer[size];
@@ -24,6 +35,17 @@ public class InsertionSortGeneric {
 		}
 		Utility.insertionSort(arrayString);
 		Utility.printArray(arrayString);
+		
+		System.out.println("Press 2 to stop the time:");
+		scanner.nextLong();
+		long stopTime = System.currentTimeMillis();
+		System.out.println("Stop Time." +  stopTime );
+
+		long elapsedTime = stopTime - startTime;
+		// System.out.println("Elapsed time between start and stop.."
+		// +elapsedTime);
+		System.out.println("Elapsed time: " + (elapsedTime / 1000) % 60 + "sec");
+		
 	}
 }
  

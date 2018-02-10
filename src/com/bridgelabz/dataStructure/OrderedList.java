@@ -13,21 +13,7 @@ public class OrderedList
 {
 	public static void main(String[] args)
 	{
-		try
-		{
-			//Initialize the linked list
-			LinkedList<Integer> linkedlist=new LinkedList<Integer>();
-			Utility.readingDataFromFile(linkedlist);
-			
-			System.out.println("Enter the word to be search:");
-			int search = Utility.getInteger();
-			Utility.searchFromFile(linkedlist,search);
-			Utility.writeDataToFile(linkedlist);
-		}
-		catch(Exception e)
-		{
-			//trace exception where actual problem occured
-			e.printStackTrace();
-		}
+		Utility.orderedList();
 	}
+
 }

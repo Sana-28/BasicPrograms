@@ -1,27 +1,42 @@
 package com.bridgelabz.util;
+public class QueueDeck
+{
+	private Node front, rear; 
+	 // number of items 
+	private int currentSize;
 
-public class QueueDeck {
-
-	 QNode front;
-	  
-	public boolean add(Object e) {
-		
-		QNode temp = new QNode();
-	      
-        // If queue is empty, then new node is front and rear both
-        if (front == null)
-        {
-           front = temp;
-           return true;
-        }
-		return false;
- 
+	private class Node//linked list
+	{ 
+		String data;
+		Node next;
+	} 
+	public QueueDeck()//constructor
+	{
+		front = null;
+		rear = null;
+		currentSize = 0;
 	}
-	
-	public Object remove() {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean isEmpty()
+	{
+		return (currentSize == 0);
 	}
-
+	public void push(String data)
+	{
+		Node oldRear = rear;
+		rear = new Node();
+		rear.data = data;
+		rear.next = null;
+		if (isEmpty()) 
+		{
+			front = rear;
+		}
+		else 
+		{
+			oldRear.next = rear;
+		}
+		currentSize++;
+		System.out.println(data);
+	}
 
 }
+

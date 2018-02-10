@@ -1,9 +1,6 @@
 package com.bridgelabz.objectOriented;
 
-import java.io.IOException;
-
 import com.bridgelabz.util.Utility;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 /**
  * Purpose: This program is to implements a data type that might be used by a

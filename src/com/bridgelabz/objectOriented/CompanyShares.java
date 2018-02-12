@@ -33,16 +33,7 @@ public class CompanyShares {
 
 			// Remove a share Symbol
 			case 2:
-				System.out.println("Enter index of share you want to Remove:");
-				int position=Utility.getInteger();
-				//list.remove(position);
-			    //Utility.removeShare();
-				break;
-
-			case 3:
-				
-				break;
-			case 4:
+				Utility.removeShare();
 				break;
 			}
 		} while (choice < 2);

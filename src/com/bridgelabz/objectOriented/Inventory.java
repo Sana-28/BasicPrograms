@@ -14,10 +14,12 @@ import org.json.simple.parser.JSONParser;
 public class Inventory {
 
 	public static void main(String[] args) {
+		
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(
-					new FileReader("/home/bridgelabz/SANAworkspace/BasicProgram/src/com/bridgelabz/objectOriented/inventory.json"));
+					new FileReader("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
+							+ "com/bridgelabz/objectOriented/inventory.json"));
 
 			JSONObject jsonObject = (JSONObject) obj;
 

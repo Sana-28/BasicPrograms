@@ -1,24 +1,32 @@
-[{
-"Name":"abc",
-"Id":"01",
-"MobileNumber":"789567493",
-"Availability":"10:00-12:00"
-},
-{
-"Name":"sana",
-"Id":"02",
-"MobileNumber":"6784939224",
-"Availability":"10:00-12:00"
-},
-{
-"Name":"ashwini",
-"Id":"03",
-"MobileNumber":"987563429",
-"Availability":"10:00-12:00"
-},
-{
-"Name":"poonam",
-"Id":"04",
-"MobileNumber":"6789756389",
-"Availability":"10:00-12:00"
-}]
+[
+	{
+		"MobileNumber": "9879675409",
+		"PatientId": "P1",
+		"Age": "18",
+		"Name": "Aditya"
+	},
+	{
+		"MobileNumber": "5674839876",
+		"PatientId": "P2",
+		"Age": "19",
+		"Name": "Zarina"
+	},
+	{
+		"MobileNumber": "7854545454",
+		"PatientId": "P3",
+		"Age": "20",
+		"Name": "abc"
+	},
+	{
+		"MobileNumber": "9756389789",
+		"PatientId": "P4",
+		"Age": "21",
+		"Name": "Sneha"
+	},
+	{
+		"MobileNumber": "8796890564",
+		"PatientId": "P5",
+		"Age": "22",
+		"Name": "xyz"
+	}
+]

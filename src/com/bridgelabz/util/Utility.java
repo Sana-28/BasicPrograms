@@ -1012,34 +1012,44 @@ public class Utility<T> {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * This method reads the data from file and find a Integer in a file,if it is
-	 * found than added to file else removed from file.
+	 * This method reads the data from file and find a Integer in a file,if it
+	 * is found than added to file else removed from file.
 	 */
 	public static void orderedList() {
 		try {
 			boolean key = false;
-			File file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
-					+ "com/bridgelabz/dataStructure/file2.txt");
+
+			// get a file
+			File file = new File(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/dataStructure/file2.txt");
 			BufferedReader buffer = new BufferedReader(new FileReader(file));
 
 			String words = buffer.readLine();
 
-			FileWriter fileWriter = new FileWriter("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
-					+ "com/bridgelabz/dataStructure/file2.txt");
+			// write back to file
+			FileWriter fileWriter = new FileWriter(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/dataStructure/file2.txt");
+
+			// splits words of file
 			String[] string = words.split(" ");
+
+			// Initialize a linked list
 			LinkedList<String> linkedlist = new LinkedList<String>();
 
+			// add Elements to linked list
 			for (int i = 0; i < string.length; i++) {
 				linkedlist.add(string[i]);
 			}
 
 			// System.out.println(linkedlist);
 			System.out.println(linkedlist.toString());
+
 			System.out.println("Enter the string to search :");
 			String find = Utility.getString();
 
+			// If search word is same then remove it
 			for (int i = 0; i < linkedlist.size(); i++) {
 				if (linkedlist.get(i).equals(find)) {
 					linkedlist.remove(string[i]);
@@ -1048,6 +1058,8 @@ public class Utility<T> {
 				}
 			}
 			System.out.println(linkedlist.toString());
+
+			// if new word add to String
 			if (key == false) {
 
 				linkedlist.add(find);
@@ -1075,7 +1087,6 @@ public class Utility<T> {
 		}
 	}
 
-
 	/**
 	 * This method to read from from the list of numbers
 	 * 
@@ -1084,8 +1095,8 @@ public class Utility<T> {
 	public static <T> void readingDataFromFile(LinkedList<T> list) throws IOException {
 		try {
 			// read file from particular location
-			file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
-					+ "com/bridgelabz/dataStructure/file2.txt");
+			file = new File(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/dataStructure/file2.txt");
 			try {
 				// check weather file is present or not
 				if (file.exists()) {
@@ -1377,6 +1388,46 @@ public class Utility<T> {
 	 */
 
 	/**
+	 * This method is to calculate Inventory Cost
+	 */
+	public static void inventoryManagement() {
+		JSONParser parser = new JSONParser();
+
+		try {
+			Object object = parser.parse(new FileReader("/home/bridgelabz/SANAworkspace/BasicProgram"
+					+ "/src/com/bridgelabz/objectOriented/inventory1.json"));
+
+			JSONObject jsonObject = (JSONObject) object;
+			// System.out.println(jsonObject);
+
+			double amount = 0, totalAmount = 0;
+
+			JSONArray Itemlist = (JSONArray) jsonObject.get("Itemlist");
+
+			Iterator<?> iterator = Itemlist.iterator();
+
+			while (iterator.hasNext()) {
+				JSONObject jsonObject1 = (JSONObject) iterator.next();
+
+				double weight = Double.parseDouble(jsonObject1.get("weight").toString());
+				System.out.println("InventoryDetails : " + jsonObject1.get("item_Name") + " " + weight + " " + "kg"
+						+ " " + "40Rs/kg");
+
+				double price = Double.parseDouble(jsonObject1.get("price").toString());
+
+				amount = weight * price;
+				totalAmount = amount + totalAmount;
+				// System.out.println("Total Inventary cost.." + totalAmount+
+				// "\n");
+			}
+			System.out.println("\n" + "Total Inventary cost.." + totalAmount);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * This method is to replace the regular expression
 	 * 
 	 * @param message
@@ -1503,12 +1554,14 @@ public class Utility<T> {
 	 * @throws Throwable
 	 */
 
-	public static void createUser() throws IOException, ParseException, org.json.simple.parser.ParseException {
+	public static void createUser() throws IOException, ParseException, 
+										   org.json.simple.parser.ParseException {
 
 		boolean checkUser = true;
 
-		file = new File(
-				"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/objectOriented/userDetails.json");
+		file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/" + 
+						"com/bridgelabz/objectOriented/userDetails.json");
+		
 		fileReader = new FileReader(file);
 
 		// initialize JSon parser
@@ -1860,7 +1913,7 @@ public class Utility<T> {
 			System.out.print("Player" + (i + 1) + "\n");
 			for (int j = 0; j < 9; j++) {
 				array[i][j] = (deck[i + j * 4]);
-				System.out.println(" " + array[i][j]);
+				System.out.print(" " + array[i][j]);
 			}
 			System.out.println("\n");
 		}
@@ -1904,7 +1957,7 @@ public class Utility<T> {
 				array[i][j] = (deck[i + j * 4]);
 				// System.out.println(" " + array[i][j]);
 				queueDeck.push(array[i][j]);
-				//System.out.println("" + queue);
+				// System.out.println("" + queue);
 			}
 			System.out.println("\n");
 		}
@@ -1916,16 +1969,16 @@ public class Utility<T> {
 	public static void addNewPerson() {
 		try {
 			file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src"
-						+"/com/bridgelabz/objectOriented/addressBook.json");
+					+ "/com/bridgelabz/objectOriented/addressBook.json");
 			if (file.exists()) {
 
 				if (file.canRead() && file.canWrite()) {
 					fileReader = new FileReader(file);
 					JSONParser parser = new JSONParser();
 					JSONArray array = (JSONArray) parser.parse(fileReader);
-					
+
 					JSONObject json = new JSONObject();
-					
+
 					System.out.println("Enter First Name:");
 					String firstname = Utility.getString();
 					// System.out.println("firstname"+firstname);
@@ -1954,8 +2007,8 @@ public class Utility<T> {
 					String mobile = Utility.getString();
 					// System.out.println("mobile"+mobile);
 
-					Map<String,String> map =new HashMap<>();
-					
+					Map<String, String> map = new HashMap<>();
+
 					json.put("Firstname", firstname);
 					json.put("Lastname", lastname);
 					json.put("Address", address);
@@ -1963,9 +2016,9 @@ public class Utility<T> {
 					json.put("State", state);
 					json.put("Zip", zip);
 					json.put("Mobile", mobile);
-					
-					array.add( json );
-					
+
+					array.add(json);
+
 					System.out.println("Your details added Successfully." + "\n");
 					fileWriter = new FileWriter(file);
 					fileWriter.write(JSONArray.toJSONString(array));
@@ -2005,9 +2058,8 @@ public class Utility<T> {
 						while (iterator.hasNext()) {
 							JSONObject object = (JSONObject) iterator.next();
 							if (object.get("Firstname").equals(name)) {
-								System.out.println("What you want to edit in Address Book?"
-											+ "\n" + "Lastname" + "\n"+ "Address" + "\n" +
-											"City" + "\n" + "State" + "\n" + "Zip" + "\n");
+								System.out.println("What you want to edit in Address Book?" + "\n" + "Lastname" + "\n"
+										+ "Address" + "\n" + "City" + "\n" + "State" + "\n" + "Zip" + "\n");
 								String edit = Utility.getString();
 								System.out.println("Enter the new " + edit + " to update.");
 
@@ -2129,46 +2181,249 @@ public class Utility<T> {
 
 	}
 
+	/**
+	 * This method is to add Shares
+	 */
 	public static void addShare() {
 		Map list = (Map) new LinkedList<String>();
 
-		try
-		{
-			file=new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/com/"
+		try {
+			file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/com/"
 					+ "bridgelabz/objectOriented/linkedShares.json");
-			if(file.exists())
+			if (file.exists())
 				if (file.canRead() && file.canWrite()) {
 					fileReader = new FileReader(file);
 					JSONParser parser = new JSONParser();
-					JSONArray array= (JSONArray) parser.parse(fileReader);
+					JSONArray array = (JSONArray) parser.parse(fileReader);
 					Iterator iterator = ((List) array).iterator();
-					
+
 					while (iterator.hasNext()) {
-					JSONObject json=(JSONObject) iterator.next();
-					System.out.println("Enter your share you want to add:");
-					String share = Utility.getString();
-					((ArrayList) list).add(share);
-					json.putAll(list);
-					array.add(json);
+						JSONObject json = (JSONObject) iterator.next();
+						System.out.println("Enter your share you want to add:");
+						String share = Utility.getString();
+						((ArrayList) list).add(share);
+						json.putAll(list);
+						array.add(json);
 					}
 					fileWriter = new FileWriter(file);
 					fileWriter.write(JSONArray.toJSONString(array));
 					fileWriter.flush();
-					fileWriter.close();	
-		}
-	}
-		catch (Exception e) {
+					fileWriter.close();
+				}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
+	public static void removeShare() {
+		Map list = (Map) new LinkedList<String>();
+
+		try {
+			file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/com/"
+					+ "bridgelabz/objectOriented/linkedShares.json");
+			if (file.exists())
+				if (file.canRead() && file.canWrite()) {
+					fileReader = new FileReader(file);
+					JSONParser parser = new JSONParser();
+					JSONArray array = (JSONArray) parser.parse(fileReader);
+					Iterator iterator = ((List) array).iterator();
+
+					while (iterator.hasNext()) {
+						JSONObject json = (JSONObject) iterator.next();
+						System.out.println("Enter index of share you want to Remove:");
+						int position = Utility.getInteger();
+						((ArrayList) list).remove(position);
+						json.putAll(list);
+						array.add(json);
+					}
+					fileWriter = new FileWriter(file);
+					fileWriter.write(JSONArray.toJSONString(array));
+					fileWriter.flush();
+					fileWriter.close();
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * This method is to add patient details
+	 */
 	public static void addPatient() {
 
-//		try{
-//			file=new File("/home/bridgelabz/SANAworkspace/BasicProgram/"
-//					+ "src/com/bridgelabz/objectOriented/patient.json");
-//		}
-		
+		try {
+			file = new File(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/" + "src/com/bridgelabz/objectOriented/patient.json");
+			if (file.exists()) {
+
+				if (file.canRead() && file.canWrite()) {
+					fileReader = new FileReader(file);
+					JSONParser parser = new JSONParser();
+					JSONArray patientArray = (JSONArray) parser.parse(fileReader);
+
+					JSONObject jsonObject1 = new JSONObject();
+
+					System.out.println("Enter patient name:");
+					String name = Utility.getString();
+					jsonObject1.put("Name", name);
+
+					System.out.println("Enter patient ID:");
+					String id = Utility.getString();
+					jsonObject1.put("Id", id);
+
+					System.out.println("Enter Mobile number:");
+					String mobileNumber = Utility.getString();
+					jsonObject1.put("MobileNumber", mobileNumber);
+
+					System.out.println("Enter Age of patient:");
+					String age = Utility.getString();
+					jsonObject1.put("Age", age);
+
+					patientArray.add(jsonObject1);
+
+					fileWriter = new FileWriter(file);
+					fileWriter.write(JSONArray.toJSONString(patientArray));
+					fileWriter.flush();
+					fileWriter.close();
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
+	/**
+	 * This method is to fix appointment of patient with Doctor
+	 */
+	public static void fixAppointment() {
+		try {
+			File file1 = new File(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" +
+					"com/bridgelabz/objectOriented/doctors.json");
+			File file2 = new File(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" +
+					"com/bridgelabz/objectOriented/patient.json");
+
+			File file3 = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/"
+					+ "com/bridgelabz/objectOriented/appointment.json");
+
+			// check for existence of all files
+			if (file1.exists() && file2.exists() && file3.exists()) {
+
+				if (file1.canRead() && file1.canWrite() && file2.canWrite()
+						&& file2.canRead() && file3.canWrite()
+						&& file3.canRead()) {
+
+					JSONParser parser = new JSONParser();
+					fileReader = new FileReader(file1);
+					JSONArray doctorsarray = (JSONArray) parser.parse(fileReader);
+					// System.out.println(""+doctorsarray.size());
+					
+					JSONParser parser1=new JSONParser();
+					fileReader=new FileReader(file2);
+					JSONArray patientArray=(JSONArray) parser1.parse(fileReader);
+
+					Iterator<?> iterator = doctorsarray.iterator();
+
+					System.out.println("****Doctor's Details****");
+					while (iterator.hasNext()) {
+						JSONObject object = (JSONObject) iterator.next();
+						// System.out.println(""+object.size());
+						System.out.println("Doctor's Name : " + object.get("Name"));
+						System.out.println("Doctor's Id   : " + object.get("Doctor'sId"));
+						System.out.println("Speciality    : " + object.get("Speciality"));
+						System.out.println("Availability  : " + object.get("Availability"));
+						System.out.println("\n");
+					}
+					System.out.println("Enter Doctor ID to assign to a patient:");
+					String doctorId=Utility.getString();
+					//System.out.println("Entered ID: "+doctorId);
+					
+					Iterator<?> iterator1=doctorsarray.iterator();
+					
+					while(iterator1.hasNext())
+					{
+						JSONObject object1=(JSONObject) iterator1.next();
+						//System.out.println("Drs. Id"+object1.get("Doctor'sId"));
+						
+						if(doctorId.equals(object1.get("Doctor'sId")))
+						{
+							System.out.println(object1);
+							System.out.println("Enter PAtient ID to take an appointment:");
+							String patientId=Utility.getString();
+							Iterator<?> iterator2=patientArray.iterator();
+							break;
+					/*		int count=5;
+							do
+							{
+								System.out.println("Enter PAtient ID to take an appointment:");
+								String patientId=Utility.getString();
+								
+								Iterator<?> iterator2=patientArray.iterator();
+								while(iterator2.hasNext())
+								{
+									JSONObject object2=(JSONObject) iterator2.next();
+									//System.out.println("Patient ID's" +object2.get("PatientId"));
+									
+									if(patientId.equals(object2.get("PatientId")))
+									{
+										object1.put("PatientId", patientId);
+										doctorsarray.add(object1);
+										fileWriter = new FileWriter(file1);
+										fileWriter.write(JSONArray.toJSONString(doctorsarray));
+										fileWriter.flush();
+										fileWriter.close();
+									}
+								}
+							}while(count<5);*/
+					}
+					
+					}
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This method is to diplay clinique details
+	 */
+	public static void displayCliniqueDetails() {
+
+		try {
+			File file1 = new File(
+					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/objectOriented/doctors.json");
+
+			if (file.exists()) {
+				if (file.canRead() && file.canWrite()) {
+					fileReader = new FileReader(file1);
+					JSONParser parser = new JSONParser();
+					JSONArray array = (JSONArray) parser.parse(fileReader);
+					Iterator iterator = array.iterator();
+					System.out.println("\n" + "****Doctors Details****");
+
+					while (iterator.hasNext()) {
+						JSONObject object = (JSONObject) iterator.next();
+						System.out.println("Doctor's Name : " + object.get("Name"));
+						System.out.println("Doctor's Id   : " + object.get("Id"));
+						System.out.println("Availability  : " + object.get("Availability"));
+						System.out.println("Speciality    : " + object.get("Speciality"));
+					}
+				} else {
+					System.out.println("Cannot have read permission" + "\n");
+				}
+			} else {
+				System.out.println("Filenot exist.." + "\n");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }// End of utility

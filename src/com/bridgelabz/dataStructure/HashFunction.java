@@ -17,6 +17,7 @@ public class HashFunction {
 		Scanner scanfile = new Scanner(new File("/home/bridgelabz/Documents/file2.txt"));
 		// Initializing a array
 		ArrayList<Integer> list = new ArrayList<Integer>();
+		
 		// hasnext checks for next value
 		while (scanfile.hasNext()) {
 			list.add(scanfile.nextInt());
@@ -55,6 +56,7 @@ public class HashFunction {
 		System.out.println(numberList1);
 		if (numberList1.contains(number)) {
 			System.out.println("Number is present:");
+			numberList1.remove(number);
 		} else {
 			numberList1.add(number);
 		}

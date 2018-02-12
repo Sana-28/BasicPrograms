@@ -1,0 +1,37 @@
+[
+	{
+		"Availability": "10:00 A.M.-1:00 P.M.",
+		"Speciality": "MBBS",
+		"Doctor'sId": "D1",
+		"Name": "Dr.abc",
+		"patient" :{}
+	},
+	{
+		"Availability": "10:00 A.M-2:00 P.M.",
+		"Speciality": "Dentist",
+		"Doctor'sId": "D2",
+		"Name": "Dr.Sneha",
+		"patient" :{}
+	},
+	{
+		"Availability": "5:00 P.M.-8:00 P.M.",
+		"Speciality": "BUMS",
+		"Doctor'sId": "D3",
+		"Name": "Dr.ashwini",
+		"patient" :{}
+	},
+	{
+		"Availability": "9:00 A.M.-12:00 P.M.",
+		"Speciality": "BHMS",
+		"Doctor'sId": "D4",
+		"Name": "Dr.poonam",
+		"patient" :{}
+	},
+	{
+		"Availability": "5:00 P.M.-7:00 P.M.",
+		"Speciality": "MD",
+		"Doctor'sId": "D5",
+		"Name": "Dr.saloni",
+		"patient" :{}
+	}
+]

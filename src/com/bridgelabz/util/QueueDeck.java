@@ -1,40 +1,55 @@
 package com.bridgelabz.util;
+
+/**Purpose: This program is to create Queue using Linked List
+ * @author Sana Shaikh
+ * @since 13/01/2018
+ */
 public class QueueDeck
 {
+	//linked list variables
 	private Node front, rear; 
-	 // number of items 
-	private int currentSize;
+	
+	//variable to check size 
+	private int size;
 
-	private class Node//linked list
+	//linked list Node contains data and next
+	private class Node
 	{ 
 		String data;
 		Node next;
 	} 
-	public QueueDeck()//constructor
+	
+	//constructor of queue
+	public QueueDeck()
 	{
 		front = null;
 		rear = null;
-		currentSize = 0;
+		size = 0;
 	}
+	
+	//check for empty condition
 	public boolean isEmpty()
 	{
-		return (currentSize == 0);
+		return (size == 0);
 	}
+	
+	//inserting data to queue
 	public void push(String data)
 	{
-		Node oldRear = rear;
+		Node previous = rear;
 		rear = new Node();
 		rear.data = data;
 		rear.next = null;
+		
 		if (isEmpty()) 
 		{
 			front = rear;
 		}
 		else 
 		{
-			oldRear.next = rear;
+			previous.next = rear;
 		}
-		currentSize++;
+		size++;
 		System.out.println(data);
 	}
 

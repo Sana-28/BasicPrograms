@@ -2298,8 +2298,10 @@ public class Utility<T> {
 	/**
 	 * This method is to fix appointment of patient with Doctor
 	 */
-	public static void fixAppointment() {
-		try {
+	public static void fixAppointment() 
+	{
+		try 
+		{
 			File file1 = new File(
 					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" +
 					"com/bridgelabz/objectOriented/doctors.json");
@@ -2311,78 +2313,71 @@ public class Utility<T> {
 					+ "com/bridgelabz/objectOriented/appointment.json");
 
 			// check for existence of all files
-			if (file1.exists() && file2.exists() && file3.exists()) {
+			if (file1.exists() && file2.exists() && file3.exists() && file1.canRead() && file2.canRead() && file3.canRead() && file1.canWrite() && file2.canWrite() && file3.canWrite()) 
+			{
 
-				if (file1.canRead() && file1.canWrite() && file2.canWrite()
-						&& file2.canRead() && file3.canWrite()
-						&& file3.canRead()) {
 
-					JSONParser parser = new JSONParser();
-					fileReader = new FileReader(file1);
-					JSONArray doctorsarray = (JSONArray) parser.parse(fileReader);
-					// System.out.println(""+doctorsarray.size());
-					
-					JSONParser parser1=new JSONParser();
-					fileReader=new FileReader(file2);
-					JSONArray patientArray=(JSONArray) parser1.parse(fileReader);
+				JSONParser parser = new JSONParser();
+				fileReader = new FileReader(file1);
+				JSONArray doctorsarray = (JSONArray) parser.parse(fileReader);
+				// System.out.println(""+doctorsarray.size());
+				
+				JSONParser parser1=new JSONParser();
+				fileReader=new FileReader(file2);
+				JSONArray patientArray=(JSONArray) parser1.parse(fileReader);
 
-					Iterator<?> iterator = doctorsarray.iterator();
+				Iterator<?> iterator = doctorsarray.iterator();
 
-					System.out.println("****Doctor's Details****");
-					while (iterator.hasNext()) {
-						JSONObject object = (JSONObject) iterator.next();
-						// System.out.println(""+object.size());
-						System.out.println("Doctor's Name : " + object.get("Name"));
-						System.out.println("Doctor's Id   : " + object.get("Doctor'sId"));
-						System.out.println("Speciality    : " + object.get("Speciality"));
-						System.out.println("Availability  : " + object.get("Availability"));
-						System.out.println("\n");
-					}
-					System.out.println("Enter Doctor ID to assign to a patient:");
-					String doctorId=Utility.getString();
-					//System.out.println("Entered ID: "+doctorId);
-					
-					Iterator<?> iterator1=doctorsarray.iterator();
-					
-					while(iterator1.hasNext())
+				System.out.println("****Doctor's Details****");
+				while (iterator.hasNext()) {
+					JSONObject object = (JSONObject) iterator.next();
+					// System.out.println(""+object.size());
+					System.out.println("Doctor's Name : " + object.get("Name"));
+					System.out.println("Doctor's Id   : " + object.get("Doctor'sId"));
+					System.out.println("Speciality    : " + object.get("Speciality"));
+					System.out.println("Availability  : " + object.get("Availability"));
+					System.out.println("\n");
+				}
+				System.out.println("Enter Doctor ID to assign to a patient:");
+				String doctorId=Utility.getString();
+				//System.out.println("Entered ID: "+doctorId);
+				
+				Iterator<?> iterator1=doctorsarray.iterator();
+				
+				while(iterator1.hasNext())
+				{
+					JSONObject object1=(JSONObject) iterator1.next();
+					//System.out.println("Drs. Id"+object1.get("Doctor'sId"));
+					JSONArray jsonArray = (JSONArray) object1.get("patient");
+					if(doctorId.equals(object1.get("Doctor'sId")))
 					{
-						JSONObject object1=(JSONObject) iterator1.next();
-						//System.out.println("Drs. Id"+object1.get("Doctor'sId"));
-						
-						if(doctorId.equals(object1.get("Doctor'sId")))
-						{
-							System.out.println(object1);
+						if(jsonArray.size()<=2){
+							
 							System.out.println("Enter PAtient ID to take an appointment:");
 							String patientId=Utility.getString();
+							
 							Iterator<?> iterator2=patientArray.iterator();
-							break;
-					/*		int count=5;
-							do
+							while(iterator2.hasNext())
 							{
-								System.out.println("Enter PAtient ID to take an appointment:");
-								String patientId=Utility.getString();
-								
-								Iterator<?> iterator2=patientArray.iterator();
-								while(iterator2.hasNext())
-								{
-									JSONObject object2=(JSONObject) iterator2.next();
-									//System.out.println("Patient ID's" +object2.get("PatientId"));
+								JSONObject object2=(JSONObject) iterator2.next();
+								if(patientId.equals(object2.get("PatientId"))){
 									
-									if(patientId.equals(object2.get("PatientId")))
-									{
-										object1.put("PatientId", patientId);
-										doctorsarray.add(object1);
-										fileWriter = new FileWriter(file1);
-										fileWriter.write(JSONArray.toJSONString(doctorsarray));
-										fileWriter.flush();
-										fileWriter.close();
-									}
+									jsonArray.add(object2);
+									break;
 								}
-							}while(count<5);*/
+							}
+							
+						}
 					}
-					
-					}
+									
 				}
+				System.out.println(doctorsarray);
+				/*fileWriter = new FileWriter(file1);
+				fileWriter.write(JSONArray.toJSONString(doctorsarray));
+				fileWriter.flush();
+				fileWriter.close();*/
+			} else {
+				System.out.println("File not found");
 			}
 
 		} catch (Exception e) {
@@ -2394,36 +2389,47 @@ public class Utility<T> {
 	 * This method is to diplay clinique details
 	 */
 	public static void displayCliniqueDetails() {
+		
+			try
+			{
+ 			File file = new File("/home/bridgelabz/SANAworkspace/BasicProgram/src/" +
+					"com/bridgelabz/objectOriented/doctors.json");
+			if(file.exists())
+			{
+			if(file.canRead() && file.canWrite())
+			{
+			FileReader fr = new FileReader(file);
+			JSONParser parser = new JSONParser();
+			JSONArray array = (JSONArray) parser.parse(fr);
+			Iterator <?>itr = array.iterator();
+			
+			
+			System.out.println("****Doctor's Details****"+ "\n");
 
-		try {
-			File file1 = new File(
-					"/home/bridgelabz/SANAworkspace/BasicProgram/src/" + "com/bridgelabz/objectOriented/doctors.json");
-
-			if (file.exists()) {
-				if (file.canRead() && file.canWrite()) {
-					fileReader = new FileReader(file1);
-					JSONParser parser = new JSONParser();
-					JSONArray array = (JSONArray) parser.parse(fileReader);
-					Iterator iterator = array.iterator();
-					System.out.println("\n" + "****Doctors Details****");
-
-					while (iterator.hasNext()) {
-						JSONObject object = (JSONObject) iterator.next();
-						System.out.println("Doctor's Name : " + object.get("Name"));
-						System.out.println("Doctor's Id   : " + object.get("Id"));
-						System.out.println("Availability  : " + object.get("Availability"));
-						System.out.println("Speciality    : " + object.get("Speciality"));
-					}
-				} else {
-					System.out.println("Cannot have read permission" + "\n");
-				}
-			} else {
-				System.out.println("Filenot exist.." + "\n");
+			while (itr.hasNext())
+			{
+			JSONObject obj = (JSONObject) itr.next();
+			System.out.println("Name : "+obj.get("Name")+ "\n"+ "Doctor'sId : "+obj.get("Doctor'sId")+"\n"+"Specialization : "+obj.get("Speciality")+"\n"+"Availability : "+obj.get("Availability"));
+			System.out.println("\n");
 			}
-		} catch (Exception e) {
+			}
+			else
+			{
+			System.out.println("File can't have read permissions.");
+			}
+			}
+			else
+			{
+			System.out.println("File does not exits on disk.");
+			}
+			}
+			catch(Exception e)
+			{
 			e.printStackTrace();
-		}
+			}
+			
+			}
 
-	}
+	
 
 }// End of utility

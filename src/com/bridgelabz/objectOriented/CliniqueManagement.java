@@ -1,5 +1,6 @@
 package com.bridgelabz.objectOriented;
 
+import com.bridgelabz.util.FixAppointment;
 import com.bridgelabz.util.Utility;
 
 /**Purpose:This program is used to manage a list of 
@@ -26,19 +27,16 @@ public class CliniqueManagement {
 				Utility.addPatient();
 				break;
 			case 2:
-				Utility.fixAppointment();
+				FixAppointment.fixAppointment();
 				break;
 			case 3:
-				//Utility.appointmentDetails();
-				break;
-			case 4:
 				Utility.displayCliniqueDetails();
 				break;
-			case 5:
+			case 4:
 				System.exit(0);
 			}
 		}
-		while(choice<=5);
+		while(choice<=4);
 	}
 
 }
